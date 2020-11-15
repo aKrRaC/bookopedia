@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../about.dart';
 
 class NavDrawer extends StatelessWidget {
 
-  @override
 
   _launchURL() async {
     const url = 'https://github.com/aKrRaC/Bookopedia.git';
@@ -14,6 +14,11 @@ class NavDrawer extends StatelessWidget {
     }
   }
 
+  @override
+
+  Future navigateToSubPage(context) async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => About()));
+  }
 
   Widget build(BuildContext context) {
     return Drawer(
@@ -33,7 +38,7 @@ class NavDrawer extends StatelessWidget {
                 color: Colors.black,
                 image: DecorationImage(
                     fit: BoxFit.fill,
-                    image: AssetImage('images/cover.jpg')
+                    image: AssetImage('assets/images/cover.jpg')
                 )
             ),
           ),
@@ -45,8 +50,11 @@ class NavDrawer extends StatelessWidget {
               color: Colors.white
               ),
             ),
-            onTap: () => {Navigator.of(context).pop()},
-          ),
+            onTap: () => {
+              _launchURL(),
+              Navigator.of(context).pop()
+            },
+          ),//Source code
           ListTile(
             leading: Icon(Icons.info,
                 color: Colors.white),
@@ -57,9 +65,9 @@ class NavDrawer extends StatelessWidget {
               ),
             ),
             onTap: () => {
-              _launchURL(),
-              Navigator.of(context).pop()},
-          ),
+              navigateToSubPage(context),
+            },
+          ),//About
         ],
       ),
     );
