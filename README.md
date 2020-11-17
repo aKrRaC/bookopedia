@@ -1,10 +1,10 @@
-# bookopedia
+# Bookopedia
 
-A new Flutter application.
+where you find books!
 
-## Getting Started
+## About
 
-This project is a starting point for a Flutter application.
+This project is under development!
 
 A few resources to get you started if this is your first Flutter project:
 
