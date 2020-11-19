@@ -23,31 +23,44 @@ class About extends StatelessWidget {
       body: Column(
         children: <Widget>[
           SizedBox(height: 30.0,),
-          CircleAvatar(
-            backgroundImage: AssetImage('assets/ps.jpg'),
-            radius: 50.0,
-          ),
-          SizedBox(height: 10.0,),
-          Text(
-            'Bookopedia',
-            style: TextStyle(
-              fontSize: 30.0,
-              color: Colors.white,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1.8,
-            ),
-          ),
-          SizedBox(height: 10.0,),
-          Center(
+          Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(30.0,2.0,20.0,0),
+                child: CircleAvatar(
+                  backgroundImage: AssetImage('assets/ps.jpg'),
+                  radius: 45.0,
+                ),
+              ),
+          Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: Text(
+                  'Bookopedia',
+                  style: TextStyle(
+                    fontSize: 30.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 1.8,
+                  ),
+                ),
+              ),
+          Padding(
+            padding: const EdgeInsets.all(3.0),
             child: Text('where you find books!',
               style: TextStyle(
-                fontSize: 15.0,
+                fontSize: 11.0,
                 color: Colors.white,
                 letterSpacing: 1.0,
               ),
             ),
           ),
-          SizedBox(height: 30.0,),
+            ],
+          ),
+            ],
+          ),
+          SizedBox(height: 40.0,),
           Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 0.0,

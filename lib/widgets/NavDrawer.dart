@@ -14,11 +14,11 @@ class NavDrawer extends StatelessWidget {
     }
   }
 
-  @override
-
   Future navigateToSubPage(context) async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => About()));
   }
+
+  @override
 
   Widget build(BuildContext context) {
     return Drawer(
@@ -30,7 +30,7 @@ class NavDrawer extends StatelessWidget {
               'Bookopedia',
               style: TextStyle(
                   color: Colors.white,
-                  fontSize: 25,
+                  fontSize: 23,
                   fontWeight: FontWeight.w400
               ),
             ),
@@ -65,6 +65,7 @@ class NavDrawer extends StatelessWidget {
               ),
             ),
             onTap: () => {
+              Navigator.of(context).pop(),
               navigateToSubPage(context),
             },
           ),//About

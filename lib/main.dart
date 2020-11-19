@@ -1,3 +1,7 @@
+import 'package:bookopedia/Chat.dart';
+import 'package:bookopedia/HomePage.dart';
+import 'package:bookopedia/Profile.dart';
+import 'package:bookopedia/Search.dart';
 import 'package:bookopedia/widgets/NavDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -5,9 +9,10 @@ import 'package:flutter/widgets.dart';
 void main() => runApp(MaterialApp(
   home: Home(),
   theme: new ThemeData(
-  canvasColor: Colors.grey[900]
+    canvasColor: Colors.grey[900],
   )
 ));
+
 
 class Home extends StatefulWidget {
   @override
@@ -18,8 +23,11 @@ class _HomeState extends State<Home> {
 
   int selectedPage = 0;
 
-  final _pageOptions = [
-    Home(),
+  List<Widget> _pageOptions = <Widget>[
+    HomePage(),
+    Search(),
+    Chat(),
+    Profile()
   ];
 
   @override
@@ -29,10 +37,22 @@ class _HomeState extends State<Home> {
       backgroundColor: Colors.black,
       drawer: NavDrawer(),
       appBar: AppBar(
+        actions: <Widget>[
+          Container(
+            padding: EdgeInsets.all(12),
+            width: 58,
+            child: GestureDetector(
+              child: CircleAvatar(
+                  backgroundImage: AssetImage('assets/images/pic.jpg'),
+                  ),
+              onTap: (){Profile();},
+            )
+            ),
+        ],
         title: Text(
           'Bookopedia',
           style: TextStyle(
-            fontSize: 20.0,
+            fontSize: 21.0,
             fontWeight: FontWeight.w500,
             letterSpacing: 1.0,
             color: Colors.white,
@@ -52,7 +72,7 @@ class _HomeState extends State<Home> {
             label: 'Search',
           ),
           BottomNavigationBarItem(
-            icon: new Icon(Icons.mail),
+            icon: new Icon(Icons.chat),
             label: 'Chat',
           ),
           BottomNavigationBarItem(
@@ -66,6 +86,7 @@ class _HomeState extends State<Home> {
             selectedPage = index;});
           }
       ),
+      body: _pageOptions.elementAt(selectedPage),
     );
   }
 }
