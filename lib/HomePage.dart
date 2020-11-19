@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 class HomePage extends StatelessWidget {
 
   Future navigateToSubPage(context) async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Add_Books()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => AddBooks()));
   }
-
 
   @override
   Widget build(BuildContext context) {
