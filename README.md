@@ -1,4 +1,4 @@
-# Bookopedia
+# Bookopedia [wip]
 
 where you find books!
 
