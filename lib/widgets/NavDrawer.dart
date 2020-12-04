@@ -1,6 +1,6 @@
+import 'package:bookopedia/pages/about.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../about.dart';
 
 class NavDrawer extends StatelessWidget {
 

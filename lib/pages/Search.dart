@@ -25,12 +25,10 @@ class Search extends StatelessWidget {
           child: SearchBar<Post>(
             crossAxisCount: 1,
             hintText: 'Search',
-            cancellationWidget: Text(
-                'Cancel',
-              style: TextStyle(
-                color: Colors.grey
-              ),
-            ),
+            cancellationWidget: Icon(
+              Icons.close,
+              color: Colors.grey,
+            ) ,
             searchBarStyle: SearchBarStyle(
               padding: EdgeInsets.all(2),
               borderRadius: BorderRadius.circular(10),
