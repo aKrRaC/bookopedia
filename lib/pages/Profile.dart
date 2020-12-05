@@ -1,6 +1,10 @@
+import 'package:bookopedia/services/fauth.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatelessWidget {
+
+  final AuthService _auth = AuthService();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,8 +14,8 @@ class Profile extends StatelessWidget {
           label: Text('LogOut'),
           elevation: 2.0,
           tooltip: 'Add books',
-          onPressed: (){
-
+          onPressed: () async {
+            await _auth.signOut();
           },
         ),
       body: Column(

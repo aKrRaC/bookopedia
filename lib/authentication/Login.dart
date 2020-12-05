@@ -1,3 +1,5 @@
+import 'package:bookopedia/services/fauth.dart';
+import 'package:bookopedia/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:bookopedia/authentication/Signup.dart';
 import 'package:bookopedia/widgets/bezierContainer.dart';
@@ -12,6 +14,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
+  final AuthService _auth = AuthService();
+  final _formKey1 = GlobalKey<FormState>();
+  bool isLoading = false;
+
+  String email = '';
+  String password = '';
+  String error = '';
+
   Widget _backButton() {
     return InkWell(
       onTap: () {
@@ -46,12 +57,23 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(
             height: 10,
           ),
-          TextField(
+          TextFormField(
+              style: TextStyle(color: Colors.white),
+              validator: (val) => val.isEmpty ? 'Fill in all the details!' : null,
+              onChanged: (val) {
+              if (title == "Email id"){
+                setState(() => email = val);
+              }
+              else if (title == 'Password'){
+                setState(() => password = val);
+              }
+            },
               obscureText: isPassword,
               decoration: InputDecoration(
                   border: InputBorder.none,
                   fillColor: Colors.grey[900],
-                  filled: true))
+                  filled: true)
+          )
         ],
       ),
     );
@@ -126,7 +148,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
+    return isLoading ? Loading() : Scaffold(
       backgroundColor: Colors.black,
         body: Container(
           height: height,
@@ -146,8 +168,15 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(height: height * .2),
                       _title(),
                       SizedBox(height: 50),
-                      _emailPasswordWidget(),
+                      Form(
+                          key: _formKey1,
+                          child: _emailPasswordWidget()
+                      ),
                       _createAccountLabel(),
+                      Text(error,
+                          style: TextStyle(
+                              color: Colors.red
+                          )),
                     ],
                   ),
                 ),
@@ -163,10 +192,20 @@ class _LoginPageState extends State<LoginPage> {
         label: Text('Login'),
         elevation: 5.0,
         tooltip: 'Login',
-         onPressed: (){
-
-           },
-        ),
+         onPressed: () async {
+          if (_formKey1.currentState.validate()){
+            setState(() => isLoading = true);
+            dynamic result = await _auth.signEmail(email, password);
+            if (result == null){
+              setState(() {
+                isLoading = false;
+                error = 'Login unsuccessful, please enter valid credentials!';
+            });}
+            else{
+              Navigator.pop(context);
+            }
+          }
+        }),
       ),
     );
   }

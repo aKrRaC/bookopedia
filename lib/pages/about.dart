@@ -3,6 +3,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class About extends StatelessWidget {
+
+  Widget _title() {
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+          text: 'Ab',
+          style: TextStyle(
+            fontSize: 23,
+            fontWeight: FontWeight.w700,
+            color: Colors.blue[600],
+          ),
+          children: [
+            TextSpan(
+              text: 'o',
+              style: TextStyle(color: Colors.white, fontSize: 23),
+            ),
+            TextSpan(
+              text: 'ut',
+              style: TextStyle(color: Colors.blue[600], fontSize: 23),
+            ),
+          ]),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -10,15 +34,7 @@ class About extends StatelessWidget {
       drawer: NavDrawer(),
       appBar: AppBar(
         backgroundColor: Colors.grey[900],
-        title: Text(
-          'About',
-          style: TextStyle(
-            color: Colors.white,
-            fontSize: 20.0,
-            letterSpacing: 1.0,
-            fontWeight: FontWeight.w500,
-          ),
-        ) ,
+        title: _title(),
       ),
       body: Column(
         children: <Widget>[

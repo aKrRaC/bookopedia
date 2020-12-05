@@ -1,3 +1,5 @@
+import 'package:bookopedia/services/fauth.dart';
+import 'package:bookopedia/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:bookopedia/widgets/bezierContainer.dart';
 import 'package:bookopedia/authentication/Login.dart';
@@ -12,6 +14,20 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+
+  final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+  bool isLoading = false;
+
+  String email = '';
+  String password = '';
+  String dept = '';
+  String sem = '';
+  String name = '';
+  String number = '';
+  String error = '';
+  bool isLoading1 = false;
+
   Widget _backButton() {
     return InkWell(
       onTap: () {
@@ -53,7 +69,29 @@ class _SignUpPageState extends State<SignUpPage> {
           SizedBox(
             height: 8,
           ),
-          TextField(
+          TextFormField(
+              style: TextStyle(color: Colors.white),
+              validator: (val) => val.isEmpty ? 'Fill in all the details!' : null,
+              onChanged: (val) {
+                if (title == "Email id"){
+                  setState(() => email = val);
+                }
+                else if (title == 'Password (atleast 6 characters long)'){
+                  setState(() => password = val);
+                }
+                else if (title == 'Username'){
+                  setState(() => name = val);
+                }
+                else if (title == 'Department'){
+                  setState(() => dept = val);
+                }
+                else if (title == 'Semester'){
+                  setState(() => sem = val);
+                }
+                else if (title == 'Phone no.'){
+                  setState(() => number = val);
+                }
+              },
               obscureText: isPassword,
               decoration: InputDecoration(
                   border: InputBorder.none,
@@ -126,7 +164,10 @@ class _SignUpPageState extends State<SignUpPage> {
       children: <Widget>[
         _entryField("Username",),
         _entryField("Email id"),
-        _entryField("Password", isPassword: true),
+        _entryField("Password (atleast 6 characters long)", isPassword: true),
+        _entryField("Department"),
+        _entryField("Semester"),
+        _entryField("Phone no."),
       ],
     );
   }
@@ -134,7 +175,7 @@ class _SignUpPageState extends State<SignUpPage> {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
+    return isLoading1 ? Loading() : Scaffold(
       backgroundColor: Colors.black,
       body: Container(
         height: height,
@@ -157,8 +198,16 @@ class _SignUpPageState extends State<SignUpPage> {
                     SizedBox(
                       height: 30,
                     ),
-                    _emailPasswordWidget(),
+                    Form(
+                      key: _formKey,
+                      child:_emailPasswordWidget(),
+                    ),
                     _loginAccountLabel(),
+                    Text(error,
+                    style: TextStyle(
+                      color: Colors.red
+                    )),
+                    SizedBox(height: 100,)
                   ],
                 ),
               ),
@@ -174,8 +223,20 @@ class _SignUpPageState extends State<SignUpPage> {
           label: Text('Create Account'),
           elevation: 5.0,
           tooltip: 'Create Account',
-          onPressed: (){
-
+          onPressed: () async {
+            if (_formKey.currentState.validate()){
+              setState(() => isLoading1 = true);
+              dynamic result = await _auth.regEmail(email, password, name, dept, number, sem);
+              if (result == null){
+                setState(() {
+                  isLoading1 = false;
+                  error = 'Account creation unsuccessful, please enter valid details!';
+                });
+              }
+              else{
+                Navigator.pop(context);
+              }
+            }
           },
         ),
       ),

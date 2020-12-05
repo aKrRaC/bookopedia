@@ -9,7 +9,7 @@ class HomePage extends StatelessWidget {
     Navigator.push(context, MaterialPageRoute(builder: (context) => AddBooks()));
   }
 
-  Widget _title() {
+  /*Widget _title() {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
@@ -30,7 +30,7 @@ class HomePage extends StatelessWidget {
             ),
           ]),
     );
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
