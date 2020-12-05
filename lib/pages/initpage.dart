@@ -58,8 +58,8 @@ class _WelcomePageState extends State<WelcomePage> {
                   children: <Widget>[
                     SizedBox(height: height * .35),
                     CircleAvatar(
-                      backgroundImage: AssetImage('assets/images/pic.jpg'),
-                      radius: 50.0,
+                      backgroundImage: AssetImage('assets/images/icon.png'),
+                      radius: 40.0,
                     ),
                     SizedBox(height: 5.0,),
                     Center(child: _title()),

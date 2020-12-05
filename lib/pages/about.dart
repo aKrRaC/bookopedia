@@ -44,7 +44,7 @@ class About extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(30.0,2.0,20.0,0),
                 child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/ps.jpg'),
+                  backgroundImage: AssetImage('assets/images/icon.png'),
                   radius: 45.0,
                 ),
               ),
