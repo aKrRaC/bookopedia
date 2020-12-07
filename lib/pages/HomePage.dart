@@ -13,20 +13,20 @@ class HomePage extends StatelessWidget {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'Book',
+          text: 'Welc',
           style: TextStyle(
-            fontSize: 30,
+            fontSize: 32,
             fontWeight: FontWeight.w700,
             color: Colors.blue[600],
           ),
           children: [
             TextSpan(
               text: 'o',
-              style: TextStyle(color: Colors.white, fontSize: 30),
+              style: TextStyle(color: Colors.white, fontSize: 32),
             ),
             TextSpan(
-              text: 'pedia',
-              style: TextStyle(color: Colors.blue[600], fontSize: 30),
+              text: 'me',
+              style: TextStyle(color: Colors.blue[600], fontSize: 32),
             ),
           ]),
     );

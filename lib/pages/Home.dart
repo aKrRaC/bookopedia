@@ -1,4 +1,4 @@
-import 'package:bookopedia/pages/Chat.dart';
+import 'package:bookopedia/pages/chathome.dart';
 import 'package:bookopedia/pages/HomePage.dart';
 import 'package:bookopedia/pages/Profile.dart';
 import 'package:bookopedia/pages/Search.dart';

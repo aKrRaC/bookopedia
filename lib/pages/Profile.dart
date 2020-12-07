@@ -1,20 +1,28 @@
 import 'package:bookopedia/services/fauth.dart';
+import 'package:bookopedia/shared/loading.dart';
 import 'package:flutter/material.dart';
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
 
+  @override
+  _ProfileState createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
   final AuthService _auth = AuthService();
+  bool isLoading1 = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return isLoading1 ? Loading() : Scaffold(
       backgroundColor: Colors.black,
         floatingActionButton: FloatingActionButton.extended(
           icon: Icon(Icons.logout),
-          label: Text('LogOut'),
+          label: Text('Logout'),
           elevation: 2.0,
-          tooltip: 'Add books',
+          tooltip: 'Logout',
           onPressed: () async {
+            isLoading1 = true;
             await _auth.signOut();
           },
         ),
