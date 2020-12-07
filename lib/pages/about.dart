@@ -17,7 +17,7 @@ class About extends StatelessWidget {
           children: [
             TextSpan(
               text: 'o',
-              style: TextStyle(color: Colors.white, fontSize: 23),
+              style: TextStyle(color: Colors.blue[600], fontSize: 23),
             ),
             TextSpan(
               text: 'ut',
