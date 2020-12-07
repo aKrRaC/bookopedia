@@ -185,7 +185,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   text: widget.user.name,
                   style: TextStyle(
                     fontSize: 16,
-                    fontWeight: FontWeight.w400,
+                    fontWeight: FontWeight.w600,
                     color: Colors.white
                   )),
               TextSpan(text: '\n'),
@@ -195,7 +195,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w400,
-                  color: Colors.white
+                  color: Colors.grey[500]
                 ),
               )
                   :
@@ -204,6 +204,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 style: TextStyle(
                   fontSize: 11,
                   fontWeight: FontWeight.w400,
+                  color: Colors.grey[500]
                 ),
               )
             ],
