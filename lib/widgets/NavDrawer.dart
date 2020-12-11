@@ -2,6 +2,7 @@ import 'package:bookopedia/pages/about.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+
 class NavDrawer extends StatelessWidget {
 
 
@@ -72,7 +73,7 @@ class NavDrawer extends StatelessWidget {
               _launchURL(),
               Navigator.of(context).pop()
             },
-          ),//Source code
+          ),
           ListTile(
             leading: Icon(Icons.info,
                 color: Colors.white),
