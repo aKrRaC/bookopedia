@@ -25,6 +25,7 @@ class _SignUpPageState extends State<SignUpPage> {
   String sem = '';
   String name = '';
   String number = '';
+  String admnum = '';
   String error = '';
   bool isLoading1 = false;
 
@@ -81,6 +82,9 @@ class _SignUpPageState extends State<SignUpPage> {
                 }
                 else if (title == 'Username'){
                   setState(() => name = val);
+                }
+                else if (title == 'Admission number'){
+                  setState(() => admnum = val);
                 }
                 else if (title == 'Department'){
                   setState(() => dept = val);
@@ -165,6 +169,7 @@ class _SignUpPageState extends State<SignUpPage> {
         _entryField("Username",),
         _entryField("Email id"),
         _entryField("Password (atleast 6 characters long)", isPassword: true),
+        _entryField("Admission number"),
         _entryField("Department"),
         _entryField("Semester"),
         _entryField("Phone no."),
@@ -226,7 +231,7 @@ class _SignUpPageState extends State<SignUpPage> {
           onPressed: () async {
             if (_formKey.currentState.validate()){
               setState(() => isLoading1 = true);
-              dynamic result = await _auth.regEmail(email, password, name, dept, number, sem);
+              dynamic result = await _auth.regEmail(email, password, name, admnum, dept, sem, number);
               if (result == null){
                 setState(() {
                   isLoading1 = false;
@@ -234,6 +239,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 });
               }
               else{
+                Navigator.pop(context);
                 Navigator.pop(context);
               }
             }

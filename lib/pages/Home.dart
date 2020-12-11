@@ -60,7 +60,9 @@ class _HomeState extends State<Home> {
                 child: CircleAvatar(
                   backgroundImage: AssetImage('assets/images/pic.jpg'),
                 ),
-                onTap: (){Profile();},
+                onTap: (){
+                  setState(() => selectedPage = 3);
+                },
               )
           ),
         ],

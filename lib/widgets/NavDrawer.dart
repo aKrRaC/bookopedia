@@ -14,6 +14,29 @@ class NavDrawer extends StatelessWidget {
     }
   }
 
+  Widget _title() {
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+          text: 'Book',
+          style: TextStyle(
+            fontSize: 28,
+            fontWeight: FontWeight.w700,
+            color: Colors.blue[600],
+          ),
+          children: [
+            TextSpan(
+              text: 'o',
+              style: TextStyle(color: Colors.white, fontSize: 28),
+            ),
+            TextSpan(
+              text: 'pedia',
+              style: TextStyle(color: Colors.blue[600], fontSize: 28),
+            ),
+          ]),
+    );
+  }
+
   Future navigateToSubPage(context) async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => About()));
   }
@@ -26,14 +49,9 @@ class NavDrawer extends StatelessWidget {
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
-            child: Text(
-              'Bookopedia',
-              style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 23,
-                  fontWeight: FontWeight.w400
-              ),
-            ),
+            child: Align(
+                alignment: Alignment.topLeft,
+                child: _title()),
             decoration: BoxDecoration(
                 color: Colors.black,
                 image: DecorationImage(

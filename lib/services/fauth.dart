@@ -1,4 +1,5 @@
 import 'package:bookopedia/models/user.dart';
+import 'package:bookopedia/services/database.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AuthService {
@@ -28,10 +29,11 @@ class AuthService {
     }
   }*/
 
-  Future regEmail(String email, String password, String name, String dept, String number, String sem) async {
+  Future regEmail(String email, String password, String name, String admno, String dept, String sem, String number) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
+      await DatabaseService(uid: user.uid).updateUserData(name, admno, dept, sem, number);
       return _userFirebase(user);
     }catch(e){
       print(e.toString());

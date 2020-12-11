@@ -26,35 +26,37 @@ class _ProfileState extends State<Profile> {
             await _auth.signOut();
           },
         ),
-      body: Column(
-        children: <Widget>[
-        SizedBox(height: 30.0,),
-      CircleAvatar(
-        backgroundImage: AssetImage('assets/images/pic.jpg'),
-        radius: 50.0,
-      ),
-      SizedBox(height: 10.0,),
-      Text(
-        'Akhil Krishnan',
-        style: TextStyle(
-          fontSize: 30.0,
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          letterSpacing: 1.8,
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[
+          SizedBox(height: 30.0,),
+        CircleAvatar(
+          backgroundImage: AssetImage('assets/images/pic.jpg'),
+          radius: 50.0,
         ),
-      ),
-      SizedBox(height: 10.0,),
-      Center(
-        child: Text('R5, Computer Science & Engineering',
+        SizedBox(height: 10.0,),
+        Text(
+          'Akhil Krishnan',
           style: TextStyle(
-            fontSize: 10.0,
+            fontSize: 30.0,
             color: Colors.white,
-            letterSpacing: 1.0,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 1.8,
           ),
         ),
-      ),
-      SizedBox(height: 30.0,),
-      ]
+        SizedBox(height: 10.0,),
+        Center(
+          child: Text('R5, Computer Science & Engineering',
+            style: TextStyle(
+              fontSize: 10.0,
+              color: Colors.white,
+              letterSpacing: 1.0,
+            ),
+          ),
+        ),
+        SizedBox(height: 30.0,),
+        ]
+        ),
       )
     );
   }
