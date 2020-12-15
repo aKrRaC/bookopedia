@@ -1,7 +1,22 @@
 import 'package:bookopedia/widgets/NavDrawer.dart';
 import 'package:flutter/material.dart';
+import 'package:bookopedia/shared/loading.dart';
 
-class AddBooks extends StatelessWidget {
+class AddBooks extends StatefulWidget {
+
+  @override
+  _AddBooksState createState() => _AddBooksState();
+}
+
+class _AddBooksState extends State<AddBooks> {
+
+  String bookname = "";
+  String author = "";
+  String bdept = "";
+  String bsem = "";
+  String error = "";
+  final _formKey1 = GlobalKey<FormState>();
+  bool isLoading2 = false;
 
   Widget _title() {
     return RichText(
@@ -41,7 +56,32 @@ class AddBooks extends StatelessWidget {
           SizedBox(
             height: 10,
           ),
-          TextField(
+          TextFormField(
+            style: TextStyle(color: Colors.white),
+              validator: (val) => val.isEmpty ? 'Fill in all the details!' : null,
+              onChanged: (val) {
+                if (title == "Book name"){
+                  setState(() => bookname = val);
+                }
+                else if (title == 'Author'){
+                  setState(() => author = val);
+                }
+                else if (title == 'Department'){
+                  setState(() => bdept = val);
+                }
+                else if (title == 'Semester'){
+                  setState(() => bsem = val);
+                }
+                /*else if (title == 'Department'){
+                  setState(() => dept = val);
+                }
+                else if (title == 'Semester'){
+                  setState(() => sem = val);
+                }
+                else if (title == 'Phone no.'){
+                  setState(() => number = val);
+                }*/
+              },
               decoration: InputDecoration(
                   border: InputBorder.none,
                   fillColor: Colors.grey[900],
@@ -63,9 +103,10 @@ class AddBooks extends StatelessWidget {
   }
 
   @override
+
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
+    return isLoading2 ? Loading() : Scaffold(
       backgroundColor: Colors.black,
       drawer: NavDrawer(),
       appBar: AppBar(
@@ -75,7 +116,7 @@ class AddBooks extends StatelessWidget {
               width: 58,
               child: GestureDetector(
                 child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/pic.jpg'),
+                  backgroundImage: AssetImage('assets/images/pic.png'),
                 ),
                 onTap: () {
 
@@ -100,7 +141,10 @@ class AddBooks extends StatelessWidget {
                     SizedBox(
                       height: 30,
                     ),
-                    _fieldwidget(),
+                    Form(
+                      key: _formKey1,
+                        child: _fieldwidget()
+                    ),
                   ],
                 ),
               ),
@@ -113,7 +157,7 @@ class AddBooks extends StatelessWidget {
         label: Text('Add'),
         elevation: 2.0,
         tooltip: 'Add books',
-        onPressed: (){
+        onPressed: () {
 
         },
       ),

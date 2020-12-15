@@ -58,7 +58,7 @@ class _HomeState extends State<Home> {
               width: 58,
               child: GestureDetector(
                 child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/pic.jpg'),
+                  backgroundImage: AssetImage('assets/images/pic.png'),
                 ),
                 onTap: (){
                   setState(() => selectedPage = 3);

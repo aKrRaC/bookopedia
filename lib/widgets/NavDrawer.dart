@@ -15,6 +15,7 @@ class NavDrawer extends StatelessWidget {
     }
   }
 
+
   Widget _title() {
     return RichText(
       textAlign: TextAlign.center,

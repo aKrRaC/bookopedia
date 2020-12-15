@@ -40,46 +40,129 @@ class _ProfileState extends State<Profile> {
               body: SingleChildScrollView(
                 child: Column(
                     children: <Widget>[
-                      SizedBox(height: 30.0,),
-                      CircleAvatar(
-                        backgroundImage: AssetImage('assets/images/pic.jpg'),
-                        radius: 50.0,
-                      ),
-                      SizedBox(height: 10.0,),
-                      Text(
-                        userData.name,
-                        style: TextStyle(
-                          fontSize: 30.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 1.8,
-                        ),
-                      ),
-                      SizedBox(height: 10.0,),
-                      Center(
-                        child: RichText(
-                          textAlign: TextAlign.center,
-                          text: TextSpan(
-                              text: userData.sem,
-                              style: TextStyle(
-                                  fontSize: 11,
-                                  color: Colors.white
+                      Container(
+                          child: Container(
+                            width: double.infinity,
+                            height: 350.0,
+                            child: Center(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: <Widget>[
+                                  CircleAvatar(
+                                    backgroundImage: AssetImage(
+                                      "assets/images/pic.png",
+                                    ),
+                                    radius: 50.0,
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Text(
+                                    userData.name,
+                                    style: TextStyle(
+                                      fontSize: 25.0,
+                                      fontWeight: FontWeight.w600,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  SizedBox(height: 5.0,),
+                                  Center(
+                                    child: RichText(
+                                      textAlign: TextAlign.center,
+                                      text: TextSpan(
+                                          text: userData.sem,
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              color: Colors.white
+                                          ),
+                                          children: [
+                                            TextSpan(
+                                              text: ' | ',
+                                              style: TextStyle(
+                                                  color: Colors.white, fontSize: 14),
+                                            ),
+                                            TextSpan(
+                                              text: userData.dept,
+                                              style: TextStyle(
+                                                  color: Colors.white, fontSize: 14),
+                                            ),
+                                          ]),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10.0,
+                                  ),
+                                  Card(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    margin: EdgeInsets.symmetric(horizontal: 26.0,vertical: 8.0),
+                                    clipBehavior: Clip.antiAlias,
+                                    color: Colors.blue[600],
+                                    elevation: 0.0,
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 22.0),
+                                      child: Row(
+                                        children: <Widget>[
+                                          SizedBox(width: 10.0,),
+                                          Expanded(
+                                            child: Column(
+                                              children: <Widget>[
+                                                Text(
+                                                  "Books Added",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20.0,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5.0,
+                                                ),
+                                                Text(
+                                                  userData.numbook.toString(),
+                                                  style: TextStyle(
+                                                    fontSize: 18.0,
+                                                    color: Colors.white70,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                          Expanded(
+                                            child: Column(
+                                              children: <Widget>[
+                                                Text(
+                                                  "Credits",
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontSize: 20.0,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  height: 5.0,
+                                                ),
+                                                Text(
+                                                  userData.credit.toString(),
+                                                  style: TextStyle(
+                                                    fontSize: 18.0,
+                                                    color: Colors.white70,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                ],
                               ),
-                              children: [
-                                TextSpan(
-                                  text: ' | ',
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 11),
-                                ),
-                                TextSpan(
-                                  text: userData.dept,
-                                  style: TextStyle(
-                                      color: Colors.white, fontSize: 11),
-                                ),
-                              ]),
-                        ),
+                            ),
+                          )
                       ),
-                      SizedBox(height: 30.0,),
                     ]
                 ),
               )
