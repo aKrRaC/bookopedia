@@ -1,4 +1,5 @@
 import 'package:bookopedia/pages/Add_Books.dart';
+import 'package:bookopedia/pages/bookdesc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:bookopedia/widgets/bezierContainer.dart';
@@ -6,7 +7,7 @@ import 'package:bookopedia/widgets/bezierContainer.dart';
 class HomePage extends StatelessWidget {
 
   Future navigateToSubPage(context) async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => AddBooks()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Bookdesc()));
   }
 
   /*Widget _title() {

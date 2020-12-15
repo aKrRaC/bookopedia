@@ -1,4 +1,3 @@
-import 'package:bookopedia/widgets/NavDrawer.dart';
 import 'package:flutter/material.dart';
 import 'package:bookopedia/shared/loading.dart';
 
@@ -108,7 +107,6 @@ class _AddBooksState extends State<AddBooks> {
     final height = MediaQuery.of(context).size.height;
     return isLoading2 ? Loading() : Scaffold(
       backgroundColor: Colors.black,
-      drawer: NavDrawer(),
       appBar: AppBar(
         actions: <Widget>[
           Container(
