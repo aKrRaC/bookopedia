@@ -29,6 +29,7 @@ class _ProfileState extends State<Profile> {
               backgroundColor: Colors.black,
               floatingActionButton: FloatingActionButton.extended(
                 icon: Icon(Icons.logout),
+                backgroundColor: Colors.blue[600],
                 label: Text('Logout'),
                 elevation: 2.0,
                 tooltip: 'Logout',

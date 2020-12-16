@@ -190,6 +190,7 @@ class _LoginPageState extends State<LoginPage> {
         child: FloatingActionButton.extended(
         icon: Icon(Icons.login),
         label: Text('Login'),
+            backgroundColor: Colors.blue[600],
         elevation: 5.0,
         tooltip: 'Login',
          onPressed: () async {

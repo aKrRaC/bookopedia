@@ -152,6 +152,7 @@ class _AddBooksState extends State<AddBooks> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.add),
+        backgroundColor: Colors.blue[600],
         label: Text('Add'),
         elevation: 2.0,
         tooltip: 'Add books',

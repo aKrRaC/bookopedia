@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Bookdesc extends StatefulWidget {
@@ -33,6 +34,7 @@ class _BookdescState extends State<Bookdesc> {
   @override
 
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -48,6 +50,195 @@ class _BookdescState extends State<Bookdesc> {
         title: _title(),
         backgroundColor: Colors.grey[900],
       ),
+      body: Container(
+              padding: EdgeInsets.symmetric(horizontal: 20),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: <Widget>[
+                    SizedBox(height: height*.04,),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Center(
+                        child: Container(
+                          width: 145.0,
+                          height: 175.0,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                            color: Colors.blue[600],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(10.0),
+                            child: Image(
+                              image: AssetImage('assets/images/cover.jpg'),
+                              fit: BoxFit.fitHeight,
+                            ),
+                          )
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: height*0.04,),
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text("Introduction to System Software",
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.w500
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: height*0.01,),
+                    Align(
+                      alignment: Alignment.bottomLeft,
+                      child: Text("Akhil Krishnan",
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(
+                            color: Colors.grey,
+                            fontSize: 14.0,
+                            fontWeight: FontWeight.normal
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10.0,
+                    ),
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      margin: EdgeInsets.symmetric(horizontal: 2.0,vertical: 5.0),
+                      clipBehavior: Clip.antiAlias,
+                      color: Colors.blue[800],
+                      elevation: 0.0,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 24.0),
+                        child: Row(
+                          children: <Widget>[
+                            SizedBox(width: 10.0,),
+                            Expanded(
+                              child: Column(
+                                children: <Widget>[
+                                  Text(
+                                    "Book Details",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5.0,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Department: Computer Science',
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                          color: Colors.white70,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Semester: S5',
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                          color: Colors.white70,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Edition: 2nd Edition',
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                          color: Colors.white70,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(height: height*0.02,),
+                                  Text(
+                                    "Posted by",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 5.0,
+                                  ),
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        'Name: Akhil Krishnan',
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                          color: Colors.white70,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Department: Computer Science',
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                          color: Colors.white70,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Semester: S5',
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                          color: Colors.white70,
+                                        ),
+                                      ),
+                                      Text(
+                                        'Contact: ##########',
+                                        textAlign: TextAlign.left,
+                                        style: TextStyle(
+                                          fontSize: 16.0,
+                                          color: Colors.white70,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: height*.15,)
+                  ],
+                ),
+              ),
+            ),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: Icon(Icons.quick_contacts_dialer),
+        backgroundColor: Colors.blue[600],
+        label: Text('Contact'),
+        elevation: 5.0,
+        tooltip: 'Contact',
+        onPressed: () {
+
+        },
+      ),
     );
   }
 }
+

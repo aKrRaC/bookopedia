@@ -225,6 +225,7 @@ class _SignUpPageState extends State<SignUpPage> {
         padding: const EdgeInsets.all(12.0),
         child: FloatingActionButton.extended(
           icon: Icon(Icons.add),
+          backgroundColor: Colors.blue[600],
           label: Text('Create Account'),
           elevation: 5.0,
           tooltip: 'Create Account',

@@ -80,6 +80,7 @@ class _WelcomePageState extends State<WelcomePage> {
         padding: const EdgeInsets.all(12.0),
         child: FloatingActionButton.extended(
           icon: Icon(Icons.arrow_forward),
+          backgroundColor: Colors.blue[600],
           label: Text('Let\'s Go'),
           elevation: 5.0,
           tooltip: 'Let\'s Go',

@@ -1,5 +1,4 @@
 import 'package:bookopedia/pages/Add_Books.dart';
-import 'package:bookopedia/pages/bookdesc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:bookopedia/widgets/bezierContainer.dart';
@@ -7,14 +6,14 @@ import 'package:bookopedia/widgets/bezierContainer.dart';
 class HomePage extends StatelessWidget {
 
   Future navigateToSubPage(context) async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Bookdesc()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => AddBooks()));
   }
 
   /*Widget _title() {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'Welc',
+          text: 'Hell',
           style: TextStyle(
             fontSize: 32,
             fontWeight: FontWeight.w700,
@@ -43,8 +42,8 @@ class HomePage extends StatelessWidget {
         child: Stack(
           children: <Widget>[
             Positioned(
-                top: -height * .15,
-                right: -MediaQuery.of(context).size.width * .4,
+                top: -height * .28,
+                right: -MediaQuery.of(context).size.width * .45,
                 child: SingleChildScrollView(
                   child: Column(
                       children: <Widget>[
@@ -52,12 +51,13 @@ class HomePage extends StatelessWidget {
                     ]
                   )
                 ),
-            )
+            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.add),
+        backgroundColor: Colors.blue[600],
         label: Text('Add Books'),
         elevation: 2.0,
         tooltip: 'Add books',
