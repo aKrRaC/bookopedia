@@ -3,7 +3,7 @@ import 'package:bookopedia/models/message.dart';
 import 'package:bookopedia/models/chat_user.dart';
 
 class ChatScreen extends StatefulWidget {
-  final User user;
+  final User1 user;
 
   ChatScreen({this.user});
 

@@ -1,7 +1,7 @@
 import 'package:bookopedia/models/chat_user.dart';
 
 class Message {
-  final User sender;
+  final User1 sender;
   final String time; // Would usually be type DateTime or Firebase Timestamp in production apps
   final String text;
   final bool unread;

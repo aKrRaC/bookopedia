@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:bookopedia/models/user.dart';
 
-int credit = 0;
-int numbook = 0;
 
 class DatabaseService {
 
@@ -22,16 +20,6 @@ class DatabaseService {
       'phone #': number
     });
   }
-
-  /*final CollectionReference bookCollection = Firestore.instance.collection('book_data');
-  Future updateBookData(bookname, author, bdept, bsem) async {
-    return await bookCollection.document(uid).setData({
-      'book name': bookname,
-      'author': author,
-      'bookdepartment': bdept,
-      'booksemester': bsem,
-    });
-  }*/
 
   UserData _userDataFromSnapshot(DocumentSnapshot snapshot) {
     return UserData(

@@ -27,6 +27,8 @@ class _SignUpPageState extends State<SignUpPage> {
   String number = '';
   String admnum = '';
   String error = '';
+  int credit = 0;
+  int numbook = 0;
   bool isLoading1 = false;
 
   Widget _backButton() {
@@ -232,7 +234,7 @@ class _SignUpPageState extends State<SignUpPage> {
           onPressed: () async {
             if (_formKey.currentState.validate()){
               setState(() => isLoading1 = true);
-              dynamic result = await _auth.regEmail(email, password, name, admnum, dept, sem, number);
+              dynamic result = await _auth.regEmail(email, password, name, admnum, dept, sem, credit, numbook, number);
               if (result == null){
                 setState(() {
                   isLoading1 = false;

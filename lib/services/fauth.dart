@@ -18,7 +18,7 @@ class AuthService {
   }
 
 
-  Future regEmail(String email, String password, String name, String admno, String dept, String sem, String number) async {
+  Future regEmail(String email, String password, String name, String admno, String dept, String sem, int credit, int numbook, String number) async {
     try {
       AuthResult result = await _auth.createUserWithEmailAndPassword(email: email, password: password);
       FirebaseUser user = result.user;
@@ -48,6 +48,11 @@ class AuthService {
       print(e.toString());
       return null;
     }
+  }
+
+  Future<FirebaseUser> getCurrentUser() async {
+    FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    return user;
   }
 
 }

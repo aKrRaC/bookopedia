@@ -1,5 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:bookopedia/shared/loading.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:provider/provider.dart';
+import 'package:bookopedia/services/database.dart';
+import 'package:bookopedia/models/user.dart';
 
 class AddBooks extends StatefulWidget {
 
@@ -15,8 +20,18 @@ class _AddBooksState extends State<AddBooks> {
   String bdept = "";
   String bsem = "";
   String error = "";
+  String userid = "";
+  int credit = 0;
+  int numbook = 0;
   final _formKey1 = GlobalKey<FormState>();
   bool isLoading2 = false;
+  Future getCurrentUser() async {
+    final FirebaseUser user = await FirebaseAuth.instance.currentUser();
+    final uid = user.uid;
+    setState(() {
+      userid = uid.toString();
+    });
+  }
 
   Widget _title() {
     return RichText(
@@ -75,15 +90,6 @@ class _AddBooksState extends State<AddBooks> {
                 else if (title == 'Semester (eg. S5)'){
                   setState(() => bsem = val);
                 }
-                /*else if (title == 'Department'){
-                  setState(() => dept = val);
-                }
-                else if (title == 'Semester'){
-                  setState(() => sem = val);
-                }
-                else if (title == 'Phone no.'){
-                  setState(() => number = val);
-                }*/
               },
               decoration: InputDecoration(
                   border: InputBorder.none,
@@ -109,62 +115,104 @@ class _AddBooksState extends State<AddBooks> {
   @override
 
   Widget build(BuildContext context) {
+    final user = Provider.of<User>(context);
     final height = MediaQuery.of(context).size.height;
-    return isLoading2 ? Loading() : Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        actions: <Widget>[
-          Container(
-              padding: EdgeInsets.all(13),
-              width: 58,
-              child: GestureDetector(
-                child: CircleAvatar(
-                  backgroundImage: AssetImage('assets/images/pic.png'),
-                ),
-                onTap: () {
+    return isLoading2 ? Loading() : StreamBuilder(
+        stream: DatabaseService(uid: user.uid).userData,
+        builder: (context, snapshot) {
+          UserData userData = snapshot.data;
+          return Scaffold(
+            backgroundColor: Colors.black,
+            appBar: AppBar(
+              actions: <Widget>[
+                Container(
+                    padding: EdgeInsets.all(13),
+                    width: 58,
+                    child: GestureDetector(
+                      child: CircleAvatar(
+                        backgroundImage: AssetImage('assets/images/pic.png'),
+                      ),
+                      onTap: () {
 
-                },
-              )
-          ),
-        ],
-        title: _title(),
-        backgroundColor: Colors.grey[900],
-      ),
-      body: Container(
-        height: height,
-        child: Stack(
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 20),
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Form(
-                      key: _formKey1,
-                        child: _fieldwidget()
-                    ),
-                  ],
+                      },
+                    )
                 ),
+              ],
+              title: _title(),
+              backgroundColor: Colors.grey[900],
+            ),
+            body: Container(
+              height: height,
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          SizedBox(
+                            height: 30,
+                          ),
+                          Form(
+                              key: _formKey1,
+                              child: _fieldwidget()
+                          ),
+                          Text(error,
+                              style: TextStyle(
+                                  color: Colors.red
+                              )),
+                          SizedBox(height: 100,)
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        icon: Icon(Icons.add),
-        backgroundColor: Colors.blue[600],
-        label: Text('Add'),
-        elevation: 2.0,
-        tooltip: 'Add books',
-        onPressed: () {
-
-        },
-      ),
+            floatingActionButton: FloatingActionButton.extended(
+              icon: Icon(Icons.add),
+              backgroundColor: Colors.blue[600],
+              label: Text('Add'),
+              elevation: 2.0,
+              tooltip: 'Add books',
+              onPressed: () {
+                if (_formKey1.currentState.validate()) {
+                  print(userid);
+                  setState(() {
+                    isLoading2 = true;
+                  });
+                  dynamic result = Firestore.instance.collection("book_data").document()
+                      .setData({
+                    'userid': userData.admnum,
+                    'bookname': bookname,
+                    'author': author,
+                    'edition': edition,
+                    'department': bdept,
+                    'semester': bsem,
+                  });
+                  dynamic result1 = Firestore.instance.collection("user_data").document(userData.uid)
+                      .updateData({
+                    'credit': FieldValue.increment(5),
+                    'book #': FieldValue.increment(1),
+                  });
+                  print(credit);
+                  print(numbook);
+                  if (result == null || result1 == null) {
+                    setState(() {
+                      isLoading2 = false;
+                      error = 'Book insertion unsuccessful, please try again!';
+                    });
+                  }
+                  else {
+                    Navigator.pop(context);
+                  }
+                }
+              },
+            ),
+          );
+        }
     );
   }
 }
