@@ -86,10 +86,10 @@ class _SignUpPageState extends State<SignUpPage> {
                 else if (title == 'Admission number'){
                   setState(() => admnum = val);
                 }
-                else if (title == 'Department'){
+                else if (title == 'Department (eg. CS)'){
                   setState(() => dept = val);
                 }
-                else if (title == 'Semester'){
+                else if (title == 'Semester (eg. S5)'){
                   setState(() => sem = val);
                 }
                 else if (title == 'Phone no.'){
@@ -170,8 +170,8 @@ class _SignUpPageState extends State<SignUpPage> {
         _entryField("Email id"),
         _entryField("Password (atleast 6 characters long)", isPassword: true),
         _entryField("Admission number"),
-        _entryField("Department"),
-        _entryField("Semester"),
+        _entryField("Department (eg. CS)"),
+        _entryField("Semester (eg. S5)"),
         _entryField("Phone no."),
       ],
     );

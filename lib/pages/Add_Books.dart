@@ -11,6 +11,7 @@ class _AddBooksState extends State<AddBooks> {
 
   String bookname = "";
   String author = "";
+  String edition = "";
   String bdept = "";
   String bsem = "";
   String error = "";
@@ -65,10 +66,13 @@ class _AddBooksState extends State<AddBooks> {
                 else if (title == 'Author'){
                   setState(() => author = val);
                 }
-                else if (title == 'Department'){
+                else if (title == 'Edition (eg. 2nd Edition)'){
+                  setState(() => edition = val);
+                }
+                else if (title == 'Department (eg. CS)'){
                   setState(() => bdept = val);
                 }
-                else if (title == 'Semester'){
+                else if (title == 'Semester (eg. S5)'){
                   setState(() => bsem = val);
                 }
                 /*else if (title == 'Department'){
@@ -95,8 +99,9 @@ class _AddBooksState extends State<AddBooks> {
       children: <Widget>[
         _entryField("Book name",),
         _entryField("Author"),
-        _entryField("Department"),
-        _entryField("Semester"),
+        _entryField("Edition (eg. 2nd Edition)"),
+        _entryField("Department (eg. CS)"),
+        _entryField("Semester (eg. S5)"),
       ],
     );
   }
