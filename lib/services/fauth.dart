@@ -17,17 +17,6 @@ class AuthService {
         //.map(_userFirebase);
   }
 
-  /*Future signAnon() async {
-    try{
-      AuthResult result = await _auth.signInAnonymously();
-      FirebaseUser user = result.user;
-      return _userFirebase(user);
-    }
-    catch(e) {
-      print(e.toString());
-      return null;
-    }
-  }*/
 
   Future regEmail(String email, String password, String name, String admno, String dept, String sem, String number) async {
     try {
