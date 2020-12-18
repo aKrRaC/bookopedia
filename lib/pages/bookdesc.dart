@@ -1,6 +1,7 @@
 import 'package:bookopedia/models/book.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Bookdesc extends StatefulWidget {
   @override
@@ -32,6 +33,17 @@ class _BookdescState extends State<Bookdesc> {
           ]),
     );
   }
+
+  _launchURL(String phone) async {
+
+    dynamic url = 'tel:$phone';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
 
   @override
 
@@ -237,8 +249,8 @@ class _BookdescState extends State<Bookdesc> {
         label: Text('Contact'),
         elevation: 5.0,
         tooltip: 'Contact',
-        onPressed: () {
-
+        onPressed: () async {
+          _launchURL(book1.contact);
         },
       ),
     );
