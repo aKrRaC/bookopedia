@@ -12,7 +12,7 @@ class Search extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Colors.black,
-      body: SafeArea(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(height: 8.0),

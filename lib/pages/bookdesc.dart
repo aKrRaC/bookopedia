@@ -1,3 +1,4 @@
+import 'package:bookopedia/models/book.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,7 @@ class Bookdesc extends StatefulWidget {
 }
 
 class _BookdescState extends State<Bookdesc> {
+
 
   Widget _title() {
     return RichText(
@@ -34,6 +36,7 @@ class _BookdescState extends State<Bookdesc> {
   @override
 
   Widget build(BuildContext context) {
+    final BookData book1 = ModalRoute.of(context).settings.arguments;
     final height = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.black,
@@ -79,7 +82,7 @@ class _BookdescState extends State<Bookdesc> {
                     SizedBox(height: height*0.04,),
                     Align(
                       alignment: Alignment.bottomLeft,
-                      child: Text("Introduction to System Software",
+                      child: Text(book1.bookname,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: TextStyle(
@@ -92,7 +95,7 @@ class _BookdescState extends State<Bookdesc> {
                     SizedBox(height: height*0.01,),
                     Align(
                       alignment: Alignment.bottomLeft,
-                      child: Text("Akhil Krishnan",
+                      child: Text(book1.author,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 1,
                         style: TextStyle(
@@ -136,7 +139,7 @@ class _BookdescState extends State<Bookdesc> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Department: Computer Science',
+                                        'Department: ${book1.bdept}',
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
                                         textAlign: TextAlign.left,
@@ -146,7 +149,7 @@ class _BookdescState extends State<Bookdesc> {
                                         ),
                                       ),
                                       Text(
-                                        'Semester: S5',
+                                        'Semester: ${book1.bsem}',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                           fontSize: 16.0,
@@ -154,7 +157,7 @@ class _BookdescState extends State<Bookdesc> {
                                         ),
                                       ),
                                       Text(
-                                        'Edition: 2nd Edition',
+                                        'Edition: ${book1.edition}',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                           fontSize: 16.0,
@@ -179,7 +182,7 @@ class _BookdescState extends State<Bookdesc> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Name: Akhil Krishnan',
+                                        'Name: ${book1.username}',
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
                                         textAlign: TextAlign.left,
@@ -189,7 +192,7 @@ class _BookdescState extends State<Bookdesc> {
                                         ),
                                       ),
                                       Text(
-                                        'Department: Computer Science',
+                                        'Department: ${book1.userdept}',
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
                                         textAlign: TextAlign.left,
@@ -199,7 +202,7 @@ class _BookdescState extends State<Bookdesc> {
                                         ),
                                       ),
                                       Text(
-                                        'Semester: S5',
+                                        'Semester: ${book1.usersem}',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                           fontSize: 16.0,
@@ -207,7 +210,7 @@ class _BookdescState extends State<Bookdesc> {
                                         ),
                                       ),
                                       Text(
-                                        'Contact: ##########',
+                                        'Contact: ${book1.contact}',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                           fontSize: 16.0,
