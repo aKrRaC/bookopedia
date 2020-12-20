@@ -84,11 +84,11 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(color: Colors.white,
                           fontWeight: FontWeight.w600),),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(0,80,0,0),
-                          child: Align(
-                            alignment: Alignment.center,
-                              child: BookList()),
+                        Container(
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(0,175,0,70),
+                            child: BookList(),
+                          ),
                         ),
                         ]
                   ),
