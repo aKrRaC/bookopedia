@@ -17,7 +17,7 @@ class User1 {
 final User1 currentUser = User1(
   id: 0,
   name: 'Test User',
-  imageUrl: 'assets/images/nick-fury.jpg',
+  imageUrl: 'assets/images/pic.png',
   isOnline: true,
 );
 
@@ -25,12 +25,12 @@ final User1 currentUser = User1(
 final User1 test1 = User1(
   id: 1,
   name: 'Test 1',
-  imageUrl: 'assets/images/ironman.jpeg',
+  imageUrl: 'assets/images/pic.png',
   isOnline: true,
 );
 final User1 test2 = User1(
   id: 2,
   name: 'Test 2',
-  imageUrl: 'assets/images/captain-america.jpg',
+  imageUrl: 'assets/images/pic.png',
   isOnline: true,
 );

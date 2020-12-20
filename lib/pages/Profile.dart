@@ -20,6 +20,41 @@ class _ProfileState extends State<Profile> {
 
     final user = Provider.of<User>(context);
 
+    void _showLogout() {
+      showModalBottomSheet(context: context, builder: (context){
+       return Container(
+         padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
+         child: Column(
+           mainAxisSize: MainAxisSize.min,
+           children: [
+             Text('Do you really want to stop finding books and logout ?',
+               style: TextStyle(color: Colors.white,
+                fontWeight: FontWeight.w400,
+                 fontSize: 16
+               ),
+             ),
+             SizedBox(height: 40,),
+             Align(
+               alignment: Alignment.bottomRight,
+               child: FloatingActionButton.extended(
+                 icon: Icon(Icons.check),
+                 backgroundColor: Colors.blue[600],
+                 label: Text('Yep! Let me out'),
+                 elevation: 5.0,
+                 tooltip: 'Logout',
+                 onPressed: () async {
+                   isLoading1 = true;
+                   Navigator.of(context).pop();
+                   await _auth.signOut();
+                 },
+               ),
+             ),
+           ],
+         ),
+       );
+      },);
+    }
+
     return isLoading1 ? Loading() : StreamBuilder(
       stream: DatabaseService(uid: user.uid).userData,
       builder: (context, snapshot) {
@@ -33,9 +68,8 @@ class _ProfileState extends State<Profile> {
                 label: Text('Logout'),
                 elevation: 2.0,
                 tooltip: 'Logout',
-                onPressed: () async {
-                  isLoading1 = true;
-                  await _auth.signOut();
+                onPressed: () {
+                  _showLogout();
                 },
               ),
               body: SingleChildScrollView(
