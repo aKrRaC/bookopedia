@@ -48,7 +48,7 @@ class _HomePageState extends State<HomePage> {
                           child: BezierContainer(),
                         ),
                         Padding(
-                              padding: const EdgeInsets.all(26.0),
+                              padding: const EdgeInsets.fromLTRB(18, 26, 0, 0),
                               child: Align(
                                 alignment: Alignment.topLeft,
                                 child: RichText(

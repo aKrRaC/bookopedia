@@ -100,7 +100,11 @@ class _SignUpPageState extends State<SignUpPage> {
               },
               obscureText: isPassword,
               decoration: InputDecoration(
-                  border: InputBorder.none,
+                  border: new OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(10.0),
+                    ),
+                  ),
                   fillColor: Colors.grey[900],
                   filled: true))
         ],

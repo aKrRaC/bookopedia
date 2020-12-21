@@ -37,7 +37,7 @@ class _AddBooksState extends State<AddBooks> {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-          text: 'Add B',
+          text: 'Add ',
           style: TextStyle(
             fontSize: 23,
             fontWeight: FontWeight.w700,
@@ -45,12 +45,8 @@ class _AddBooksState extends State<AddBooks> {
           ),
           children: [
             TextSpan(
-              text: 'oo',
+              text: 'Books',
               style: TextStyle(color: Colors.white, fontSize: 23),
-            ),
-            TextSpan(
-              text: 'ks',
-              style: TextStyle(color: Colors.blue[600], fontSize: 23),
             ),
           ]),
     );
@@ -92,7 +88,11 @@ class _AddBooksState extends State<AddBooks> {
                 }
               },
               decoration: InputDecoration(
-                  border: InputBorder.none,
+                  border: new OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(10.0),
+                    ),
+                  ),
                   fillColor: Colors.grey[900],
                   filled: true))
         ],

@@ -1,3 +1,4 @@
+import 'package:bookopedia/pages/editpage.dart';
 import 'package:bookopedia/services/database.dart';
 import 'package:bookopedia/services/fauth.dart';
 import 'package:bookopedia/shared/loading.dart';
@@ -21,7 +22,11 @@ class _ProfileState extends State<Profile> {
     final user = Provider.of<User>(context);
 
     void _showLogout() {
-      showModalBottomSheet(context: context, builder: (context){
+      showModalBottomSheet(
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.vertical(top: Radius.circular(10.0))),
+        context: context,
+        builder: (context){
        return Container(
          padding: EdgeInsets.symmetric(vertical: 20.0, horizontal: 20.0),
          child: Column(
@@ -53,6 +58,17 @@ class _ProfileState extends State<Profile> {
          ),
        );
       },);
+    }
+
+    void _showEdit() {
+      showModalBottomSheet(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(10.0))),
+          context: context,
+          isScrollControlled: true,
+          builder: (context){
+        return Editpage();
+      });
     }
 
     return isLoading1 ? Loading() : StreamBuilder(
@@ -93,13 +109,27 @@ class _ProfileState extends State<Profile> {
                                   SizedBox(
                                     height: 10.0,
                                   ),
-                                  Text(
-                                    userData.name,
-                                    style: TextStyle(
-                                      fontSize: 25.0,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white,
-                                    ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      SizedBox(width: 40,),
+                                      Align(
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          userData.name,
+                                          style: TextStyle(
+                                            fontSize: 25.0,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      IconButton(icon: Icon(Icons.edit,
+                                      color: Colors.grey,),
+                                          onPressed: () {
+                                            _showEdit();
+                                          })
+                                    ],
                                   ),
                                   SizedBox(height: 5.0,),
                                   Center(
@@ -118,7 +148,7 @@ class _ProfileState extends State<Profile> {
                                                   color: Colors.white, fontSize: 14),
                                             ),
                                             TextSpan(
-                                              text: userData.dept,
+                                              text: "${userData.dept} | ${userData.number}",
                                               style: TextStyle(
                                                   color: Colors.white, fontSize: 14),
                                             ),

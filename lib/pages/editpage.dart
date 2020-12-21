@@ -1,0 +1,116 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+
+class Editpage extends StatefulWidget {
+  @override
+  _EditpageState createState() => _EditpageState();
+}
+
+class _EditpageState extends State<Editpage> {
+
+  String name1 = "";
+  String phonenum = "";
+
+  Widget _title() {
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+          text: 'Edit ',
+          style: TextStyle(
+            fontSize: 30,
+            fontWeight: FontWeight.w700,
+            color: Colors.blue[600],
+          ),
+          children: [
+            TextSpan(
+              text: 'Details',
+              style: TextStyle(color: Colors.white, fontSize: 30),
+            ),
+          ]),
+    );
+  }
+
+
+  Widget _entryField(String title) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Text(
+            title,
+            style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15,
+                color: Colors.white
+            ),
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          TextFormField(
+              style: TextStyle(color: Colors.white),
+              onChanged: (val) {
+                if (title == "Name"){
+                  setState(() => name1 = val);
+                }
+                else if (title == 'Phone no.'){
+                  setState(() => phonenum = val);
+                }
+              },
+              decoration: InputDecoration(
+                  border: new OutlineInputBorder(
+                    borderRadius: const BorderRadius.all(
+                      const Radius.circular(10.0),
+                    ),
+                  ),
+                  fillColor: Colors.grey[900],
+                  filled: true))
+        ],
+      ),
+    );
+  }
+
+  Widget _field() {
+    return Column(
+      children: <Widget>[
+        _entryField("Name",),
+        _entryField("Phone no."),
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Container(
+        decoration: BoxDecoration(
+          color: Colors.black
+        ),
+          padding: EdgeInsets.symmetric(horizontal: 20),
+          child: SingleChildScrollView(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 125,),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: _title()
+                  ),
+                  SizedBox(height: 50,),
+                  _field(),
+                  SizedBox(height: 100,),
+
+                ]),
+          )
+      ),
+      floatingActionButton: FloatingActionButton.extended(
+        icon: Icon(Icons.update),
+        backgroundColor: Colors.blue[600],
+        label: Text('Update'),
+        elevation: 2.0,
+        tooltip: 'Update details',
+        onPressed: null,
+      ),
+    );
+  }
+}
