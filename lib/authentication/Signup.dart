@@ -74,12 +74,36 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
           TextFormField(
               style: TextStyle(color: Colors.white),
-              validator: (val) => val.isEmpty ? 'Fill in all the details!' : null,
+              validator: (val){
+                if(title == "Username" && val.isEmpty){
+                  return "Please enter a username";
+                }else if(title == "Email id" && val.isEmpty){
+                  return "Please enter a valid email id";
+                }else if(title == "Password" && val.isEmpty){
+                  return "Please enter a password";
+                }else if(title == "Password" && val.isNotEmpty && val.length < 6){
+                  return "Please enter a password of length >= 6";
+                }else if(title == "Re-enter Password" && val.isEmpty){
+                  return "Please re-enter password";
+                }else if(title == "Re-enter Password" && val != password && val.isNotEmpty){
+                  return "Passwords don\'t match";
+                } else if(title == "Admission number" && val.isEmpty && val.length !=6){
+                  return "Please enter a valid admission number";
+                }else if(title == "Department (eg. CS)" && val.isEmpty){
+                  return "Please enter department";
+                }else if(title == 'Semester (eg. S5)' && val.isEmpty){
+                  return "Please enter semester";
+                }else if(title == "Phone no." && val.isEmpty && val.length != 10) {
+                  return "Please enter a valid phone number";
+                }else{
+                  return null;
+                }
+              },
               onChanged: (val) {
                 if (title == "Email id"){
                   setState(() => email = val);
                 }
-                else if (title == 'Password (atleast 6 characters long)'){
+                else if (title == 'Password'){
                   setState(() => password = val);
                 }
                 else if (title == 'Username'){
@@ -174,7 +198,8 @@ class _SignUpPageState extends State<SignUpPage> {
       children: <Widget>[
         _entryField("Username",),
         _entryField("Email id"),
-        _entryField("Password (atleast 6 characters long)", isPassword: true),
+        _entryField("Password", isPassword: true),
+        _entryField("Re-enter Password", isPassword: true),
         _entryField("Admission number"),
         _entryField("Department (eg. CS)"),
         _entryField("Semester (eg. S5)"),

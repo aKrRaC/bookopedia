@@ -59,7 +59,16 @@ class _LoginPageState extends State<LoginPage> {
           ),
           TextFormField(
               style: TextStyle(color: Colors.white),
-              validator: (val) => val.isEmpty ? 'Fill in all the details!' : null,
+              validator: (val){
+                if(title == "Email id" && val.isEmpty){
+                  return "Please enter an email id";
+                }else if(title == "Password" && val.isEmpty){
+                  return "Please enter a password";
+                }
+                else{
+                  return null;
+                }
+              },
               onChanged: (val) {
               if (title == "Email id"){
                 setState(() => email = val);

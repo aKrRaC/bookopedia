@@ -10,6 +10,7 @@ class _EditpageState extends State<Editpage> {
 
   String name1 = "";
   String phonenum = "";
+  final _formKey = GlobalKey<FormState>();
 
   Widget _title() {
     return RichText(
@@ -31,6 +32,7 @@ class _EditpageState extends State<Editpage> {
   }
 
 
+
   Widget _entryField(String title) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -47,6 +49,13 @@ class _EditpageState extends State<Editpage> {
             height: 10,
           ),
           TextFormField(
+              validator: (val){
+                if(title == "Phone no." && val.isNotEmpty && val.length != 10){
+                  return "Please enter a valid phone number";
+                }else{
+                  return null;
+                }
+              },
               style: TextStyle(color: Colors.white),
               onChanged: (val) {
                 if (title == "Name"){
@@ -88,28 +97,42 @@ class _EditpageState extends State<Editpage> {
         ),
           padding: EdgeInsets.symmetric(horizontal: 20),
           child: SingleChildScrollView(
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  SizedBox(height: 125,),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: _title()
-                  ),
-                  SizedBox(height: 50,),
-                  _field(),
-                  SizedBox(height: 100,),
-
-                ]),
+            child: Form(
+              key: _formKey,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(height: 125,),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: _title()
+                    ),
+                    SizedBox(height: 50,),
+                    _field(),
+                    SizedBox(height: 10,),
+                    Text(" v Swipe down to dismiss v ",
+                      style: TextStyle(
+                        color: Colors.grey
+                      ),
+                    ),
+                    SizedBox(height: 100,),
+                  ]),
+            ),
           )
       ),
       floatingActionButton: FloatingActionButton.extended(
         icon: Icon(Icons.update),
         backgroundColor: Colors.blue[600],
-        label: Text('Update'),
+        label: Text('Update details'),
         elevation: 2.0,
         tooltip: 'Update details',
-        onPressed: null,
+        onPressed: () {
+          if (_formKey.currentState.validate()){
+            Navigator.of(context).pop();
+          }else{
+
+          }
+        },
       ),
     );
   }
