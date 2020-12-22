@@ -93,7 +93,9 @@ class _SignUpPageState extends State<SignUpPage> {
                   return "Please enter department";
                 }else if(title == 'Semester (eg. S5)' && val.isEmpty){
                   return "Please enter semester";
-                }else if(title == "Phone no." && val.isEmpty && val.length != 10) {
+                }else if(title == "Phone no." && val.isEmpty) {
+                  return "Please enter a phone number";
+                }else if(title == "Phone no." && val.isNotEmpty && val.length != 10) {
                   return "Please enter a valid phone number";
                 }else{
                   return null;
