@@ -185,11 +185,8 @@ class _AddBooksState extends State<AddBooks> {
                   });
                   dynamic result = Firestore.instance.collection("book_data").document()
                       .setData({
-                    'userid': userData.admnum,
-                    'username': userData.name,
-                    'userdept': userData.dept,
-                    'usersem': userData.sem,
-                    'contact': userData.number,
+                    'useradmnum': userData.admnum,
+                    'userid': userData.uid,
                     'bookname': bookname,
                     'author': author,
                     'edition': edition,

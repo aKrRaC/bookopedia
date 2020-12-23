@@ -2,6 +2,8 @@ import 'package:bookopedia/models/book.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:bookopedia/shared/loading.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Bookdesc extends StatefulWidget {
   @override
@@ -10,6 +12,7 @@ class Bookdesc extends StatefulWidget {
 
 class _BookdescState extends State<Bookdesc> {
 
+  bool isLoading5 = false;
 
   Widget _title() {
     return RichText(
@@ -50,61 +53,67 @@ class _BookdescState extends State<Bookdesc> {
   Widget build(BuildContext context) {
     final BookData book1 = ModalRoute.of(context).settings.arguments;
     final height = MediaQuery.of(context).size.height;
-    return Scaffold(
-      backgroundColor: Colors.black,
-      appBar: AppBar(
-        actions: <Widget>[
-          Container(
-              padding: EdgeInsets.all(13),
-              width: 58,
-              child: CircleAvatar(
-                backgroundImage: AssetImage('assets/images/pic.png'),
-              )
-          ),
-        ],
-        title: _title(),
-        backgroundColor: Colors.grey[900],
-      ),
-      body: Container(
+    return isLoading5 ? Loading() : StreamBuilder(
+        stream: Firestore.instance.collection('user_data').document(book1.userid).snapshots(),
+        builder: (context, snapshot) {
+        if (snapshot.hasData) {
+          var user2 = snapshot.data;
+          return Scaffold(
+            backgroundColor: Colors.black,
+            appBar: AppBar(
+              actions: <Widget>[
+                Container(
+                    padding: EdgeInsets.all(13),
+                    width: 58,
+                    child: CircleAvatar(
+                      backgroundImage: AssetImage('assets/images/pic.png'),
+                    )
+                ),
+              ],
+              title: _title(),
+              backgroundColor: Colors.grey[900],
+            ),
+            body: Container(
               padding: EdgeInsets.symmetric(horizontal: 20),
               child: SingleChildScrollView(
                 child: Column(
                   children: <Widget>[
-                    SizedBox(height: height*.04,),
+                    SizedBox(height: height * .04,),
                     Align(
                       alignment: Alignment.topLeft,
                       child: Center(
                         child: Container(
-                          width: 145.0,
-                          height: 175.0,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                            color: Colors.blue[600],
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(10.0),
-                            child: Image(
-                              image: AssetImage('assets/images/cover.jpg'),
-                              fit: BoxFit.fitHeight,
+                            width: 145.0,
+                            height: 175.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.all(
+                                  Radius.circular(10.0)),
+                              color: Colors.blue[600],
                             ),
-                          )
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10.0),
+                              child: Image(
+                                image: AssetImage('assets/images/cover.jpg'),
+                                fit: BoxFit.fitHeight,
+                              ),
+                            )
                         ),
                       ),
                     ),
-                    SizedBox(height: height*0.04,),
+                    SizedBox(height: height * 0.04,),
                     Align(
                       alignment: Alignment.bottomLeft,
                       child: Text(book1.bookname,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 2,
                         style: TextStyle(
-                          color: Colors.white,
-                          fontSize: 25.0,
-                          fontWeight: FontWeight.w500
+                            color: Colors.white,
+                            fontSize: 25.0,
+                            fontWeight: FontWeight.w500
                         ),
                       ),
                     ),
-                    SizedBox(height: height*0.01,),
+                    SizedBox(height: height * 0.01,),
                     Align(
                       alignment: Alignment.bottomLeft,
                       child: Text(book1.author,
@@ -124,12 +133,14 @@ class _BookdescState extends State<Bookdesc> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      margin: EdgeInsets.symmetric(horizontal: 2.0,vertical: 5.0),
+                      margin: EdgeInsets.symmetric(
+                          horizontal: 2.0, vertical: 5.0),
                       clipBehavior: Clip.antiAlias,
                       color: Colors.blue[800],
                       elevation: 0.0,
                       child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 24.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10.0, vertical: 24.0),
                         child: Row(
                           children: <Widget>[
                             SizedBox(width: 10.0,),
@@ -178,7 +189,7 @@ class _BookdescState extends State<Bookdesc> {
                                       ),
                                     ],
                                   ),
-                                  SizedBox(height: height*0.02,),
+                                  SizedBox(height: height * 0.02,),
                                   Text(
                                     "Posted by",
                                     style: TextStyle(
@@ -194,7 +205,7 @@ class _BookdescState extends State<Bookdesc> {
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Name: ${book1.username}',
+                                        'Name: ${user2["name"]}',
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
                                         textAlign: TextAlign.left,
@@ -204,7 +215,7 @@ class _BookdescState extends State<Bookdesc> {
                                         ),
                                       ),
                                       Text(
-                                        'Department: ${book1.userdept}',
+                                        'Department: ${user2["department"]}',
                                         overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
                                         textAlign: TextAlign.left,
@@ -214,7 +225,7 @@ class _BookdescState extends State<Bookdesc> {
                                         ),
                                       ),
                                       Text(
-                                        'Semester: ${book1.usersem}',
+                                        'Semester: ${user2["semester"]}',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                           fontSize: 16.0,
@@ -222,7 +233,7 @@ class _BookdescState extends State<Bookdesc> {
                                         ),
                                       ),
                                       Text(
-                                        'Contact: ${book1.contact}',
+                                        'Contact: ${user2["phone #"]}',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
                                           fontSize: 16.0,
@@ -238,22 +249,27 @@ class _BookdescState extends State<Bookdesc> {
                         ),
                       ),
                     ),
-                    SizedBox(height: height*.15,)
+                    SizedBox(height: height * .15,)
                   ],
                 ),
               ),
             ),
-      floatingActionButton: FloatingActionButton.extended(
-        icon: Icon(Icons.quick_contacts_dialer),
-        backgroundColor: Colors.blue[600],
-        label: Text('Contact'),
-        elevation: 5.0,
-        tooltip: 'Contact',
-        onPressed: () async {
-          _launchURL(book1.contact);
-        },
-      ),
-    );
+            floatingActionButton: FloatingActionButton.extended(
+              icon: Icon(Icons.quick_contacts_dialer),
+              backgroundColor: Colors.blue[600],
+              label: Text('Contact'),
+              elevation: 5.0,
+              tooltip: 'Contact',
+              onPressed: () async {
+                _launchURL(user2["phone #"]);
+              },
+            ),
+          );
+        }else{
+          return Loading();
+        }
+        }
+        );
   }
 }
 

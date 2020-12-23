@@ -21,7 +21,7 @@ class BookTile extends StatelessWidget {
           if(snapshot.hasData) {
             UserData userData = snapshot.data;
             if (book.bdept == userData.dept && book.bsem == userData.sem &&
-                book.userid != userData.admnum  && userData.credit > 10) {
+                book.useradmnum != userData.admnum  && userData.credit > 10) {
               return Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Card(

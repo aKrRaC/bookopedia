@@ -49,10 +49,7 @@ class DatabaseService {
         bsem: doc.data['semester'],
         edition: doc.data['edition'],
         userid: doc.data['userid'],
-        username: doc.data['username'],
-        userdept: doc.data['userdept'],
-        usersem: doc.data['usersem'],
-        contact: doc.data['contact'],
+        useradmnum: doc.data['useradmnum'],
       );
     }).toList();
   }
