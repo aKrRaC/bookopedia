@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:provider/provider.dart';
+import 'package:bookopedia/models/user.dart';
+import 'package:bookopedia/services/database.dart';
+import 'package:bookopedia/shared/loading.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Editpage extends StatefulWidget {
   @override
@@ -11,6 +16,8 @@ class _EditpageState extends State<Editpage> {
   String name1 = "";
   String phonenum = "";
   final _formKey = GlobalKey<FormState>();
+  bool isLoading4 = false;
+  String error = '';
 
   Widget _title() {
     return RichText(
@@ -89,51 +96,104 @@ class _EditpageState extends State<Editpage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: Container(
-        decoration: BoxDecoration(
-          color: Colors.black
-        ),
-          padding: EdgeInsets.symmetric(horizontal: 20),
-          child: SingleChildScrollView(
+    final user = Provider.of<User>(context);
+    return isLoading4 ? Loading() : StreamBuilder(
+        stream: DatabaseService(uid: user.uid).userData,
+        builder: (context, snapshot) {
+        UserData userData = snapshot.data;
+        return Scaffold(
+          backgroundColor: Colors.black,
+          body: Container(
+            decoration: BoxDecoration(
+              color: Colors.black
+            ),
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: SingleChildScrollView(
             child: Form(
               key: _formKey,
               child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    SizedBox(height: 125,),
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: _title()
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  SizedBox(height: 125,),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: _title()
+                  ),
+                  SizedBox(height: 50,),
+                  _field(),
+                  SizedBox(height: 10,),
+                  Text(" v Swipe down to dismiss v ",
+                    style: TextStyle(
+                    color: Colors.grey
                     ),
-                    SizedBox(height: 50,),
-                    _field(),
-                    SizedBox(height: 10,),
-                    Text(" v Swipe down to dismiss v ",
+                  ),
+                  SizedBox(height: 10,),
+                  Text(error,
                       style: TextStyle(
-                        color: Colors.grey
-                      ),
-                    ),
-                    SizedBox(height: 100,),
-                  ]),
+                          color: Colors.red
+                      )),
+                  SizedBox(height: 100,),
+              ]),
             ),
-          )
-      ),
-      floatingActionButton: FloatingActionButton.extended(
-        icon: Icon(Icons.update),
-        backgroundColor: Colors.blue[600],
-        label: Text('Update details'),
-        elevation: 2.0,
-        tooltip: 'Update details',
-        onPressed: () {
-          if (_formKey.currentState.validate()){
-            Navigator.of(context).pop();
-          }else{
-
-          }
-        },
-      ),
+            )
+          ),
+          floatingActionButton: FloatingActionButton.extended(
+            icon: Icon(Icons.update),
+            backgroundColor: Colors.blue[600],
+            label: Text('Update details'),
+            elevation: 2.0,
+            tooltip: 'Update details',
+            onPressed: () {
+              if (_formKey.currentState.validate()){
+                setState(() {
+                  isLoading4 = true;
+                });
+                if(name1.isNotEmpty && phonenum.isNotEmpty){
+                  dynamic result2 = Firestore.instance.collection("user_data").document(userData.uid)
+                      .updateData({
+                    'name': name1,
+                    'phone #': phonenum,
+                  });
+                  if(result2 == null){
+                    setState(() {
+                      isLoading4 = false;
+                      error = 'Updating details unsuccessful, please try again!';
+                    });
+                  }else{
+                    Navigator.of(context).pop();
+                  }
+                }else if(name1.isNotEmpty){
+                  dynamic result2 = Firestore.instance.collection("user_data").document(userData.uid)
+                      .updateData({
+                    'name': name1,
+                  });
+                  if(result2 == null){
+                    setState(() {
+                      isLoading4 = false;
+                      error = 'Updating details unsuccessful, please try again!';
+                    });
+                  }else{
+                    Navigator.of(context).pop();
+                  }
+                }else if(phonenum.isNotEmpty){
+                  dynamic result2 = Firestore.instance.collection("user_data").document(userData.uid)
+                      .updateData({
+                    'phone #': phonenum,
+                  });
+                  if(result2 == null){
+                    setState(() {
+                      isLoading4 = false;
+                      error = 'Updating details unsuccessful, please try again!';
+                    });
+                  }else{
+                    Navigator.of(context).pop();
+                  }
+                }
+              }
+            },
+          ),
+        );
+      }
     );
   }
 }
