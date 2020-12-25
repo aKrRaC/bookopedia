@@ -7,6 +7,7 @@ class BookData {
   String edition;
   String userid;
   String useradmnum;
+  String bookid;
 
-  BookData({ this.bookname, this.author, this.bdept, this.bsem, this.edition, this.userid, this.useradmnum });
+  BookData({ this.bookname, this.author, this.bdept, this.bsem, this.edition, this.userid, this.useradmnum, this.bookid });
 }

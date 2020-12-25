@@ -232,7 +232,7 @@ class _BookdescState extends State<Bookdesc> {
                                           color: Colors.white70,
                                         ),
                                       ),
-                                      Text(
+                                      SelectableText(
                                         'Contact: ${user2["phone #"]}',
                                         textAlign: TextAlign.left,
                                         style: TextStyle(
@@ -249,7 +249,7 @@ class _BookdescState extends State<Bookdesc> {
                         ),
                       ),
                     ),
-                    SizedBox(height: height * .15,)
+                    SizedBox(height: height * .15,),
                   ],
                 ),
               ),

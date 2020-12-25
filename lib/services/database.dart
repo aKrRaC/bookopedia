@@ -50,6 +50,7 @@ class DatabaseService {
         edition: doc.data['edition'],
         userid: doc.data['userid'],
         useradmnum: doc.data['useradmnum'],
+        bookid: doc.data['bookid'],
       );
     }).toList();
   }

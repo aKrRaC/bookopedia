@@ -59,6 +59,8 @@ class _EditpageState extends State<Editpage> {
               validator: (val){
                 if(title == "Phone no." && val.isNotEmpty && val.length != 10){
                   return "Please enter a valid phone number";
+                }else if(name1.isEmpty && phonenum.isEmpty){
+                  return "Please enter any one detail inorder to update";
                 }else{
                   return null;
                 }

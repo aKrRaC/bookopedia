@@ -183,24 +183,27 @@ class _AddBooksState extends State<AddBooks> {
                   setState(() {
                     isLoading2 = true;
                   });
-                  dynamic result = Firestore.instance.collection("book_data").document()
-                      .setData({
-                    'useradmnum': userData.admnum,
-                    'userid': userData.uid,
-                    'bookname': bookname,
-                    'author': author,
-                    'edition': edition,
-                    'department': bdept,
-                    'semester': bsem,
+                  DocumentReference result = Firestore.instance.collection("book_data").document();
+                      result.setData({
+                        'bookid': result.documentID,
+                        'useradmnum': userData.admnum,
+                        'userid': userData.uid,
+                        'bookname': bookname,
+                        'author': author,
+                        'edition': edition,
+                        'department': bdept,
+                        'semester': bsem,
                   });
-                  dynamic result1 = Firestore.instance.collection("user_data").document(userData.uid)
-                      .updateData({
-                    'credit': FieldValue.increment(5),
-                    'book #': FieldValue.increment(1),
-                  });
-                  print(credit);
-                  print(numbook);
-                  if (result == null || result1 == null) {
+                  print(result);
+                  if (result != null) {
+                    Firestore.instance.collection("user_data")
+                        .document(userData.uid)
+                        .updateData({
+                      'credit': FieldValue.increment(5),
+                      'book #': FieldValue.increment(1),
+                    });
+                  }
+                  if (result == null) {
                     setState(() {
                       isLoading2 = false;
                       error = 'Book insertion unsuccessful, please try again!';

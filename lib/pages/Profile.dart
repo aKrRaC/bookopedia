@@ -1,4 +1,5 @@
 import 'package:bookopedia/pages/editpage.dart';
+import 'package:bookopedia/pages/user_books.dart';
 import 'package:bookopedia/services/database.dart';
 import 'package:bookopedia/services/fauth.dart';
 import 'package:bookopedia/shared/loading.dart';
@@ -15,6 +16,10 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   final AuthService _auth = AuthService();
   bool isLoading1 = false;
+
+  Future navigateToSubPage(context) async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => UserBooks()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +75,53 @@ class _ProfileState extends State<Profile> {
         return Editpage();
       });
     }
+
+    void pressed(butname) {
+      if (butname == "Books added by me") {
+        navigateToSubPage(context);
+      }
+    }
+
+    Widget button(String butname) {
+       return new Padding(
+        padding: const EdgeInsets.fromLTRB(16.0,0,0,0),
+        child: ButtonTheme(
+          height: 60,
+          child: FlatButton(
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              splashColor: Colors.blue[600],
+              onPressed: () {
+                pressed(butname);
+              },
+              child: Row(
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text(
+                      butname,
+                      style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 17.0,
+                          fontWeight: FontWeight.normal
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(140,0,0,0),
+                    child: Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      color: Colors.grey,
+                      size: 15.0,
+                    ),
+                  )
+                ],
+              )),
+        ),
+      );
+    }
+
 
     return isLoading1 ? Loading() : StreamBuilder(
       stream: DatabaseService(uid: user.uid).userData,
@@ -164,7 +216,7 @@ class _ProfileState extends State<Profile> {
                                     ),
                                     margin: EdgeInsets.symmetric(horizontal: 26.0,vertical: 8.0),
                                     clipBehavior: Clip.antiAlias,
-                                    color: Colors.blue[600],
+                                    color: Colors.blue[800],
                                     elevation: 0.0,
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 22.0),
@@ -222,12 +274,13 @@ class _ProfileState extends State<Profile> {
                                         ],
                                       ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
                             ),
                           )
                       ),
+                      button("Books added by me"),
                     ]
                 ),
               )
