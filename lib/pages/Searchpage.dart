@@ -18,8 +18,6 @@ class Searchpage extends StatelessWidget {
 
     Future<List<BookData>> search(String search) async {
       await Future.delayed(Duration(seconds: 1));
-      if (search == "empty") return [];
-      if (search == "error") throw Error();
       return List.generate(search.length, (int index) {
         return BookData(
           bookname: book.bookname,

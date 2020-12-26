@@ -83,7 +83,7 @@ class _BookdescState extends State<Bookdesc> {
                       alignment: Alignment.topLeft,
                       child: Center(
                         child: Container(
-                            width: 145.0,
+                            width: 130.0,
                             height: 175.0,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.all(
@@ -93,8 +93,8 @@ class _BookdescState extends State<Bookdesc> {
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(10.0),
                               child: Image(
-                                image: AssetImage('assets/images/cover.jpg'),
-                                fit: BoxFit.fitHeight,
+                                image: AssetImage('assets/images/NotAvailable.jpg'),
+                                fit: BoxFit.fill,
                               ),
                             )
                         ),

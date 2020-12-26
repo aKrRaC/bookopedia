@@ -69,7 +69,21 @@ class _AddBooksState extends State<AddBooks> {
           ),
           TextFormField(
             style: TextStyle(color: Colors.white),
-              validator: (val) => val.isEmpty ? 'Fill in all the details!' : null,
+              validator: (val){
+                if(title == "Book name" && val.isEmpty){
+                  return "Please enter book name";
+                }else if(title == "Author" && val.isEmpty){
+                  return "Please enter author name";
+                }else if(title == 'Edition (eg. 2nd Edition)' && val.isEmpty){
+                  return "Please enter edition of the book";
+                }else if(title == 'Department (eg. CS)' && val.isEmpty){
+                  return "Please enter the department to which the book belongs";
+                }else if(title == 'Semester (eg. S5)' && val.isEmpty){
+                  return "Please enter semester";
+                }else{
+                  return null;
+                }
+              },
               onChanged: (val) {
                 if (title == "Book name"){
                   setState(() => bookname = val);
@@ -110,6 +124,16 @@ class _AddBooksState extends State<AddBooks> {
         _entryField("Semester (eg. S5)"),
       ],
     );
+  }
+
+  setSearchParam(String bookname) {
+    List<String> bookSearchList = List();
+    String temp = "";
+    for (int i = 0; i < bookname.length; i++) {
+      temp = temp + bookname[i];
+      bookSearchList.add(temp);
+    }
+    return bookSearchList;
   }
 
   @override
@@ -193,6 +217,7 @@ class _AddBooksState extends State<AddBooks> {
                         'edition': edition,
                         'department': bdept,
                         'semester': bsem,
+                        'booksearch': setSearchParam(bookname),
                   });
                   print(result);
                   if (result != null) {
