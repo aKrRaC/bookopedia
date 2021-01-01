@@ -25,6 +25,7 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
 
     final user = Provider.of<User>(context);
+    final width = MediaQuery.of(context).size.width;
 
     void _showLogout() {
       showModalBottomSheet(
@@ -108,13 +109,11 @@ class _ProfileState extends State<Profile> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(140,0,0,0),
-                    child: Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: Colors.grey,
-                      size: 15.0,
-                    ),
+                  SizedBox(width: width-232,),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: Colors.grey,
+                    size: 15.0,
                   )
                 ],
               )),

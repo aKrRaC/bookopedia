@@ -17,6 +17,8 @@ class UserBookTile extends StatelessWidget {
 
   Widget build(BuildContext context) {
 
+    final width = MediaQuery.of(context).size.width;
+
     void _showConfirmation() {
       showModalBottomSheet(
         shape: RoundedRectangleBorder(
@@ -99,13 +101,11 @@ class UserBookTile extends StatelessWidget {
                     ),
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(170,0,0,0),
-                  child: Icon(
-                    Icons.arrow_forward_ios_rounded,
-                    color: Colors.grey,
-                    size: 15.0,
-                  ),
+                SizedBox(width: width-185,),
+                Icon(
+                  Icons.arrow_forward_ios_rounded,
+                  color: Colors.grey,
+                  size: 15.0,
                 )
               ],
             )),
@@ -141,6 +141,9 @@ class UserBookTile extends StatelessWidget {
               return Padding(
                 padding: const EdgeInsets.only(top: 8.0),
                 child: Card(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
                   color: Colors.blue[800],
                   margin: EdgeInsets.fromLTRB(18.0, 6.0, 18.0, 0.0),
                   child: ListTile(
