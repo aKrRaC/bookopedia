@@ -10,6 +10,45 @@ class Search extends StatelessWidget {
 
   Widget build(BuildContext context) {
 
+    void _pressed(butname) {
+
+    }
+
+    Widget button(String butname) {
+      return new GestureDetector(
+          child: Stack(
+            children: <Widget>[
+              Container(
+                width: 175,
+                height: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: Colors.blue[800],
+                    image: DecorationImage(
+                        image:AssetImage("assets/images/button.jpg"),
+                        fit:BoxFit.cover
+                    ),
+                )
+              ),
+              Positioned(
+                top: 50,
+                left: 10,
+                child: Text(butname,
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.w600,
+                    fontSize: 26
+                  ),
+                ),
+              )
+            ]
+          ),
+          onTap:(){
+            _pressed(butname);
+        }
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.black,
       body: SingleChildScrollView(
@@ -45,6 +84,46 @@ class Search extends StatelessWidget {
                 ),
               )
             ),
+            Padding(
+              padding: EdgeInsets.fromLTRB(15, 20, 15, 15),
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children:<Widget>[
+                        button("S1"),
+                        button("S2"),
+                      ],
+                    ),
+                    SizedBox(height: 15,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children:<Widget>[
+                        button("S3"),
+                        button("S4"),
+                      ],
+                    ),
+                    SizedBox(height: 15,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children:<Widget>[
+                        button("S5"),
+                        button("S6"),
+                      ],
+                    ),
+                    SizedBox(height: 15,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children:<Widget>[
+                        button("S7"),
+                        button("S8"),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            )
           ],
         ),
       ) ,
