@@ -1,4 +1,5 @@
 import 'package:bookopedia/pages/Searchpage.dart';
+import 'package:bookopedia/pages/sem_book.dart';
 import 'package:flutter/material.dart';
 
 class Search extends StatelessWidget {
@@ -11,41 +12,54 @@ class Search extends StatelessWidget {
   Widget build(BuildContext context) {
 
     void _pressed(butname) {
-
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SemBook(),
+          settings: RouteSettings(
+            arguments: butname,
+          ),
+        ),
+      );
     }
 
     Widget button(String butname) {
-      return new GestureDetector(
-          child: Stack(
-            children: <Widget>[
-              Container(
-                width: 175,
-                height: 100,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                    color: Colors.blue[800],
-                    image: DecorationImage(
-                        image:AssetImage("assets/images/button.jpg"),
-                        fit:BoxFit.cover
-                    ),
-                )
-              ),
-              Positioned(
-                top: 50,
-                left: 10,
-                child: Text(butname,
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w600,
-                    fontSize: 26
+      return Material(
+        child: InkWell(
+          child: new GestureDetector(
+              child: Stack(
+                children: <Widget>[
+                  Container(
+                    width: 175,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                        color: Colors.blue[800],
+                        image: DecorationImage(
+                            image:AssetImage("assets/images/button.jpg"),
+                            fit:BoxFit.cover
+                        ),
+                    )
                   ),
-                ),
-              )
-            ]
+                  Positioned(
+                    top: 50,
+                    left: 10,
+                    child: Text(butname,
+                      style: TextStyle(
+                        color: Colors.white70,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 26
+                      ),
+                    ),
+                  )
+                ]
+              ),
+              onTap:(){
+                _pressed(butname);
+            }
           ),
-          onTap:(){
-            _pressed(butname);
-        }
+          splashColor: Colors.blue[600],
+        ),
       );
     }
 
