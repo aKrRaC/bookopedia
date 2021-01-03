@@ -3,9 +3,11 @@ import 'package:bookopedia/pages/user_books.dart';
 import 'package:bookopedia/services/database.dart';
 import 'package:bookopedia/services/fauth.dart';
 import 'package:bookopedia/shared/loading.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:bookopedia/models/user.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Profile extends StatefulWidget {
 
@@ -16,6 +18,7 @@ class Profile extends StatefulWidget {
 class _ProfileState extends State<Profile> {
   final AuthService _auth = AuthService();
   bool isLoading1 = false;
+  final _formKey = GlobalKey<FormState>();
 
   Future navigateToSubPage(context) async {
     Navigator.push(context, MaterialPageRoute(builder: (context) => UserBooks()));
@@ -66,6 +69,58 @@ class _ProfileState extends State<Profile> {
       },);
     }
 
+    Widget _entryField(String title) {
+      return Container(
+        margin: EdgeInsets.symmetric(vertical: 10),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Text(
+              title,
+              style: TextStyle(fontWeight: FontWeight.w500, fontSize: 15,
+                  color: Colors.white
+              ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            TextFormField(
+                validator: (val){
+                  if(title == "" && val.isEmpty){
+                    return "Type 'I confirm to delete' inorder to continue";
+                  }else if(title == "" && val.isNotEmpty && val != "I confirm to delete"){
+                    return "Type 'I confirm to delete' inorder to continue";
+                  }else{
+                    return null;
+                  }
+                },
+                style: TextStyle(color: Colors.white),
+                decoration: InputDecoration(
+                  hintText: "Type 'I confirm to delete' to continue",
+                    hintStyle: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 15
+                    ),
+                    border: new OutlineInputBorder(
+                      borderRadius: const BorderRadius.all(
+                        const Radius.circular(10.0),
+                      ),
+                    ),
+                    fillColor: Colors.black,
+                    filled: true))
+          ],
+        ),
+      );
+    }
+
+    Widget _field() {
+      return Column(
+        children: <Widget>[
+          _entryField("",),
+        ],
+      );
+    }
+
     void _showEdit() {
       showModalBottomSheet(
           shape: RoundedRectangleBorder(
@@ -77,9 +132,80 @@ class _ProfileState extends State<Profile> {
       });
     }
 
+    void _showWarning() {
+      showModalBottomSheet(
+          shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.vertical(top: Radius.circular(10.0))),
+          context: context,
+          isScrollControlled: true,
+          builder: (context){
+            return Container(
+              padding: EdgeInsets.symmetric(vertical: 0.0, horizontal: 20.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  SizedBox(height: 20,),
+                  Image(image: AssetImage("assets/images/caution.png")),
+                  SizedBox(height: 30,),
+                  Text('By continuing you are confirming to delete your account and the books you have added! Do you want to continue ?',
+                    textAlign: TextAlign.justify,
+                    style: TextStyle(color: Colors.white,
+                        fontWeight: FontWeight.w400,
+                        fontSize: 16
+                    ),
+                  ),
+                  Form(
+                      key: _formKey,
+                      child: _field()
+                  ),
+                  SizedBox(height: 20,),
+                  Align(
+                    alignment: Alignment.bottomRight,
+                    child: FloatingActionButton.extended(
+                      icon: Icon(Icons.delete),
+                      backgroundColor: Colors.red,
+                      label: Text('Confirm & Delete'),
+                      elevation: 5.0,
+                      tooltip: 'Delete account',
+                      onPressed: () async {
+                        if (_formKey.currentState.validate()) {
+                          isLoading1 = true;
+                          Navigator.of(context).pop();
+                          dynamic res = Firestore.instance.collection(
+                              'book_data').getDocuments().then((snapshot) {
+                            List<DocumentSnapshot> allDocs = snapshot.documents;
+                            List<DocumentSnapshot> filteredDocs = allDocs.where(
+                                    (document) =>
+                                document.data['userid'] == user.uid
+                            ).toList();
+                            for (DocumentSnapshot ds in filteredDocs) {
+                              ds.reference.delete();
+                            }
+                          });
+                          dynamic res1 = Firestore.instance.collection(
+                              "user_data").document(user.uid).delete();
+                          if (res != null && res1 != null) {
+                            FirebaseUser user1 = await FirebaseAuth.instance
+                                .currentUser();
+                            user1.delete();
+                          }
+                        }
+                      }
+                    ),
+                  ),
+                  SizedBox(height: 10,)
+                ],
+              ),
+            );
+          });
+    }
+
     void pressed(butname) {
       if (butname == "Books added by me") {
         navigateToSubPage(context);
+      }
+      if (butname == "Delete account      \t\t") {
+        _showWarning();
       }
     }
 
@@ -280,6 +406,17 @@ class _ProfileState extends State<Profile> {
                           )
                       ),
                       button("Books added by me"),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.fromLTRB(32,5,0,5),
+                          child: Text("Dangerous",
+                            style: TextStyle(color: Colors.red,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600),),
+                        ),
+                      ),
+                      button("Delete account      \t\t"),
                     ]
                 ),
               )

@@ -70,7 +70,7 @@ class Search extends StatelessWidget {
           children: [
             SizedBox(height: 8.0),
             Padding(
-              padding: EdgeInsets.fromLTRB(15, 20, 15, 15),
+              padding: EdgeInsets.fromLTRB(15, 25, 15, 20),
               child: ButtonTheme(
                 minWidth: 400,
                 height: 50,
@@ -97,6 +97,15 @@ class Search extends StatelessWidget {
                 ),
                 ),
               )
+            ),
+            Align(
+              alignment: Alignment.topLeft,
+              child: Padding(
+                padding: const EdgeInsets.fromLTRB(16,10,0,0),
+                child: Text("Books filtered based on semester: ",
+                  style: TextStyle(color: Colors.white,
+                      fontWeight: FontWeight.w600),),
+              ),
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(15, 20, 15, 15),

@@ -1,3 +1,4 @@
+import 'package:bookopedia/pages/welcome.dart';
 import 'package:bookopedia/services/fauth.dart';
 import 'package:bookopedia/shared/loading.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,10 @@ class _SignUpPageState extends State<SignUpPage> {
   final AuthService _auth = AuthService();
   final _formKey = GlobalKey<FormState>();
   bool isLoading = false;
+
+  Future navigateToSubPage(context) async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => Welcome()));
+  }
 
   String email = '';
   String password = '';
@@ -275,6 +280,7 @@ class _SignUpPageState extends State<SignUpPage> {
               else{
                 Navigator.pop(context);
                 Navigator.pop(context);
+                navigateToSubPage(context);
               }
             }
           },

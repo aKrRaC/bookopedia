@@ -59,6 +59,7 @@ flutter:
     - assets/images/nope.png
     - assets/images/NotAvailable.jpg
     - assets/images/button.jpg
+    - assets/images/caution.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

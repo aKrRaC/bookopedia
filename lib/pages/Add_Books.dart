@@ -74,8 +74,6 @@ class _AddBooksState extends State<AddBooks> {
                   return "Please enter book name";
                 }else if(title == "Author" && val.isEmpty){
                   return "Please enter author name";
-                }else if(title == 'Edition (eg. 2nd Edition)' && val.isEmpty){
-                  return "Please enter edition of the book";
                 }else if(title == 'Department (eg. CS)' && val.isEmpty){
                   return "Please enter the department to which the book belongs";
                 }else if(title == 'Semester (eg. S5)' && val.isEmpty){
@@ -198,9 +196,9 @@ class _AddBooksState extends State<AddBooks> {
             floatingActionButton: FloatingActionButton.extended(
               icon: Icon(Icons.add),
               backgroundColor: Colors.blue[600],
-              label: Text('Add'),
+              label: Text('Add Book'),
               elevation: 2.0,
-              tooltip: 'Add books',
+              tooltip: 'Add book',
               onPressed: () {
                 if (_formKey1.currentState.validate()) {
                   print(userid);
