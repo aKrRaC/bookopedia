@@ -204,7 +204,7 @@ class _ProfileState extends State<Profile> {
       if (butname == "Books added by me") {
         navigateToSubPage(context);
       }
-      if (butname == "Delete account      \t\t") {
+      if (butname == "Delete account    ") {
         _showWarning();
       }
     }
@@ -409,14 +409,21 @@ class _ProfileState extends State<Profile> {
                       Align(
                         alignment: Alignment.topLeft,
                         child: Padding(
-                          padding: const EdgeInsets.fromLTRB(32,5,0,5),
-                          child: Text("Dangerous",
-                            style: TextStyle(color: Colors.red,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600),),
-                        ),
-                      ),
-                      button("Delete account      \t\t"),
+                          padding: const EdgeInsets.fromLTRB(16,5,16,5),
+                          child: ExpansionTile(
+                            title: Text("Dangerous options",
+                                      style: TextStyle(color: Colors.red,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w600),),
+                            trailing: Icon(Icons.keyboard_arrow_down,
+                              color: Colors.grey,
+                            ),
+                            children: <Widget>[
+                              button("Delete account    "),
+                            ]
+                          )
+                        )
+                      )
                     ]
                 ),
               )
