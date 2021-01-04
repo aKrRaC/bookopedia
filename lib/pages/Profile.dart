@@ -144,7 +144,7 @@ class _ProfileState extends State<Profile> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  SizedBox(height: 20,),
+                  SizedBox(height: 10,),
                   Image(image: AssetImage("assets/images/caution.png")),
                   SizedBox(height: 30,),
                   Text('By continuing you are confirming to delete your account and the books you have added! Do you want to continue ?',
@@ -170,7 +170,6 @@ class _ProfileState extends State<Profile> {
                       onPressed: () async {
                         if (_formKey.currentState.validate()) {
                           isLoading1 = true;
-                          Navigator.of(context).pop();
                           dynamic res = Firestore.instance.collection(
                               'book_data').getDocuments().then((snapshot) {
                             List<DocumentSnapshot> allDocs = snapshot.documents;
@@ -189,11 +188,12 @@ class _ProfileState extends State<Profile> {
                                 .currentUser();
                             user1.delete();
                           }
+                          Navigator.pop(context);
                         }
                       }
                     ),
                   ),
-                  SizedBox(height: 10,)
+                  SizedBox(height: 20,)
                 ],
               ),
             );

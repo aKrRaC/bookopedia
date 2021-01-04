@@ -30,7 +30,7 @@ class Search extends StatelessWidget {
               child: Stack(
                 children: <Widget>[
                   Container(
-                    width: 175,
+                    width: 170,
                     height: 100,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -108,12 +108,12 @@ class Search extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(15, 20, 15, 15),
+              padding: EdgeInsets.fromLTRB(0, 20, 0, 15),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children:<Widget>[
                         button("S1"),
                         button("S2"),
@@ -121,7 +121,7 @@ class Search extends StatelessWidget {
                     ),
                     SizedBox(height: 15,),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children:<Widget>[
                         button("S3"),
                         button("S4"),
@@ -129,7 +129,7 @@ class Search extends StatelessWidget {
                     ),
                     SizedBox(height: 15,),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children:<Widget>[
                         button("S5"),
                         button("S6"),
@@ -137,7 +137,7 @@ class Search extends StatelessWidget {
                     ),
                     SizedBox(height: 15,),
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children:<Widget>[
                         button("S7"),
                         button("S8"),
