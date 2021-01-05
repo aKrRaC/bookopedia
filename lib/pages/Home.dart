@@ -61,7 +61,7 @@ class _HomeState extends State<Home> {
                   backgroundImage: AssetImage('assets/images/pic.png'),
                 ),
                 onTap: (){
-                  setState(() => selectedPage = 3);
+                  setState(() => selectedPage = 2);
                 },
               )
           ),
@@ -73,6 +73,7 @@ class _HomeState extends State<Home> {
           backgroundColor: Colors.grey[900],
           unselectedItemColor: Colors.white,
           showUnselectedLabels: false,
+          selectedItemColor: Colors.white,
           items: [
             BottomNavigationBarItem(
               icon: new Icon(Icons.home),
