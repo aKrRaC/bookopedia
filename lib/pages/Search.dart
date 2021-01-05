@@ -30,13 +30,13 @@ class Search extends StatelessWidget {
               child: Stack(
                 children: <Widget>[
                   Container(
-                    width: 170,
-                    height: 100,
+                    width: 165,
+                    height: 95,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                         color: Colors.blue[800],
                         image: DecorationImage(
-                            image:AssetImage("assets/images/button.jpg"),
+                            image:AssetImage("assets/images/button.png"),
                             fit:BoxFit.cover
                         ),
                     )
@@ -108,7 +108,7 @@ class Search extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(0, 20, 0, 15),
+              padding: EdgeInsets.fromLTRB(12, 20, 12, 15),
               child: SingleChildScrollView(
                 child: Column(
                   children: [

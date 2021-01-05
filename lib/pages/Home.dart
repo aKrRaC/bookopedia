@@ -1,4 +1,4 @@
-import 'package:bookopedia/pages/chathome.dart';
+//import 'package:bookopedia/pages/chathome.dart';
 import 'package:bookopedia/pages/HomePage.dart';
 import 'package:bookopedia/pages/Profile.dart';
 import 'package:bookopedia/pages/Search.dart';
@@ -18,7 +18,7 @@ class _HomeState extends State<Home> {
   List<Widget> _pageOptions = <Widget>[
     HomePage(),
     Search(),
-    Chat(),
+    //Chat(),
     Profile()
   ];
 
@@ -71,6 +71,8 @@ class _HomeState extends State<Home> {
       ),
       bottomNavigationBar: BottomNavigationBar(
           backgroundColor: Colors.grey[900],
+          unselectedItemColor: Colors.white,
+          showUnselectedLabels: false,
           items: [
             BottomNavigationBarItem(
               icon: new Icon(Icons.home),
@@ -80,10 +82,10 @@ class _HomeState extends State<Home> {
               icon: new Icon(Icons.search),
               label: 'Search',
             ),
-            BottomNavigationBarItem(
+            /*BottomNavigationBarItem(
               icon: new Icon(Icons.chat),
               label: 'Chat',
-            ),
+            ),*/
             BottomNavigationBarItem(
                 icon: Icon(Icons.person),
                 label: 'Profile'
