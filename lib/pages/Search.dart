@@ -28,8 +28,8 @@ class Search extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               Container(
-                width: 156,
-                height: 92,
+                width: 165,
+                height: 100,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Colors.blue[800],
@@ -103,7 +103,7 @@ class Search extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.fromLTRB(12, 20, 12, 15),
+              padding: EdgeInsets.fromLTRB(6, 20, 6, 15),
               child: SingleChildScrollView(
                 child: Column(
                   children: [
