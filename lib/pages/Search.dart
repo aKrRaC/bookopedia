@@ -24,42 +24,37 @@ class Search extends StatelessWidget {
     }
 
     Widget button(String butname) {
-      return Material(
-        child: InkWell(
-          child: new GestureDetector(
-              child: Stack(
-                children: <Widget>[
-                  Container(
-                    width: 165,
-                    height: 95,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                        color: Colors.blue[800],
-                        image: DecorationImage(
-                            image:AssetImage("assets/images/button.png"),
-                            fit:BoxFit.cover
-                        ),
-                    )
-                  ),
-                  Positioned(
-                    top: 50,
-                    left: 10,
-                    child: Text(butname,
-                      style: TextStyle(
-                        color: Colors.white70,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 26
-                      ),
+      return new GestureDetector(
+          child: Stack(
+            children: <Widget>[
+              Container(
+                width: 156,
+                height: 92,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                    color: Colors.blue[800],
+                    image: DecorationImage(
+                        image:AssetImage("assets/images/button.png"),
+                        fit:BoxFit.cover
                     ),
-                  )
-                ]
+                )
               ),
-              onTap:(){
-                _pressed(butname);
-            }
+              Positioned(
+                top: 50,
+                left: 10,
+                child: Text(butname,
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 26
+                  ),
+                ),
+              )
+            ]
           ),
-          splashColor: Colors.blue[600],
-        ),
+          onTap:(){
+            _pressed(butname);
+        }
       );
     }
 
