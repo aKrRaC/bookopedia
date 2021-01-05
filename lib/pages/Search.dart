@@ -28,8 +28,8 @@ class Search extends StatelessWidget {
           child: Stack(
             children: <Widget>[
               Container(
-                width: 165,
-                height: 100,
+                width: 170,
+                height: 105,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                     color: Colors.blue[800],
