@@ -130,7 +130,6 @@ class UserBookTile extends StatelessWidget {
           );
         },);
     }
-
     final user = Provider.of<User>(context);
     return StreamBuilder(
         stream: DatabaseService(uid: user.uid).userData,

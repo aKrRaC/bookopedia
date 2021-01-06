@@ -254,16 +254,19 @@ class _BookdescState extends State<Bookdesc> {
                 ),
               ),
             ),
-            floatingActionButton: FloatingActionButton.extended(
-              icon: Icon(Icons.quick_contacts_dialer),
-              backgroundColor: Colors.blue[600],
-              label: Text('Contact'),
-              elevation: 5.0,
-              tooltip: 'Contact',
-              onPressed: () async {
-                _launchURL(user2["phone #"]);
-              },
-            ),
+            floatingActionButton: new Visibility(
+              visible: (book1.userid != user2["userid"]),
+              child: FloatingActionButton.extended(
+                icon: Icon(Icons.quick_contacts_dialer),
+                backgroundColor: Colors.blue[600],
+                label: Text('Contact'),
+                elevation: 5.0,
+                tooltip: 'Contact',
+                onPressed: () async {
+                  _launchURL(user2["phone #"]);
+                },
+              ),
+            )
           );
         }else{
           return Loading();

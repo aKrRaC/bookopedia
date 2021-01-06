@@ -13,6 +13,8 @@ class _BookListState extends State<BookList> {
   bool isLoading3 = false;
   @override
   Widget build(BuildContext context) {
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     final books = Provider.of<List<BookData>>(context);
     if (books.isNotEmpty) {
       return isLoading3 ? Loading() :ListView.builder(
@@ -24,7 +26,31 @@ class _BookListState extends State<BookList> {
         },
       );
     }else{
-      return Loading();
+      return Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(height: height*.112,),
+                Image(
+                  image: AssetImage("assets/images/nope.png"),
+                ),
+                SizedBox(height: 3.0,),
+                Text("\t\t  Seems pretty empty to me :(",
+                  style: TextStyle(
+                      color: Colors.grey,
+                      fontSize: 12
+                  ),
+                )
+              ],
+            ),
+            SizedBox(width: width*0.02,)
+          ],
+        ),
+      );
     }
   }
 }

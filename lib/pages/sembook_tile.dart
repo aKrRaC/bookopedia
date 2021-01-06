@@ -16,9 +16,7 @@ class SemBookTile extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
-
     final user = Provider.of<User>(context);
-    final height = MediaQuery.of(context).size.height;
     return StreamBuilder(
         stream: DatabaseService(uid: user.uid).userData,
         builder: (context, snapshot) {
@@ -62,25 +60,8 @@ class SemBookTile extends StatelessWidget {
                   ),
                 ),
               );
-            } else {
+            }else {
               return Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(height: height*.28,),
-                    Image(
-                      image: AssetImage("assets/images/nope.png"),
-                    ),
-                    SizedBox(height: 3.0,),
-                    Text("\t\t  Seems pretty empty to me :(",
-                      style: TextStyle(
-                        color: Colors.grey,
-                        fontSize: 12
-                      ),
-                    )
-                  ],
-                ),
               );
             }
           }else{

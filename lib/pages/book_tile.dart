@@ -1,10 +1,10 @@
 import 'package:bookopedia/pages/bookdesc.dart';
+import 'package:bookopedia/shared/loading.dart';
 import 'package:flutter/material.dart';
 import 'package:bookopedia/models/book.dart';
 import 'package:provider/provider.dart';
 import 'package:bookopedia/models/user.dart';
 import 'package:bookopedia/services/database.dart';
-import 'package:bookopedia/shared/loading.dart';
 
 class BookTile extends StatelessWidget {
 
@@ -15,7 +15,6 @@ class BookTile extends StatelessWidget {
 
   Widget build(BuildContext context) {
     final user = Provider.of<User>(context);
-    final height = MediaQuery.of(context).size.height;
     return StreamBuilder(
         stream: DatabaseService(uid: user.uid).userData,
       builder: (context, snapshot) {
@@ -62,23 +61,7 @@ class BookTile extends StatelessWidget {
               );
             } else {
               return Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    SizedBox(height: height*0.095,),
-                    Image(
-                      image: AssetImage("assets/images/nope.png"),
-                    ),
-                    SizedBox(height: 3.0,),
-                    Text("\t\t  Seems pretty empty to me :(",
-                      style: TextStyle(
-                          color: Colors.grey,
-                          fontSize: 12
-                      ),
-                    )
-                  ],
-                ),
+
               );
             }
           }else{
