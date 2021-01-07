@@ -211,6 +211,17 @@ class _BookdescState extends State<Bookdesc> {
                                                   color: Colors.white70,
                                                 ),
                                               ),
+                                              Visibility(
+                                                visible: (book1.userid != userData.uid),
+                                                child: Text(
+                                                  'Credits required: ${book1.creq}',
+                                                  textAlign: TextAlign.left,
+                                                  style: TextStyle(
+                                                    fontSize: 16.0,
+                                                    color: Colors.white70,
+                                                  ),
+                                                ),
+                                              ),
                                             ],
                                           ),
                                           SizedBox(height: height * 0.02,),
