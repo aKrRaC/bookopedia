@@ -1,64 +1,106 @@
-//import 'package:bookopedia/models/book.dart';
-import 'package:flutter/material.dart';
+import 'package:bookopedia/shared/loading.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 
-class BookSearch extends SearchDelegate<String> {
+class BookSearch extends StatefulWidget {
+  @override
+  _BookSearchState createState() => _BookSearchState();
+}
 
-
-  Future<List> searchBooks() async {
-    List<String> bookList;
-    final List<DocumentSnapshot> documents = (await Firestore.instance
-        .collection('book_data')
-        .where("booksearch",arrayContains: query)
-        .getDocuments())
-        .documents;
-    bookList = documents.map((documentSnapshot) {
-      documentSnapshot['bookname'] as String;
-    }).toList();
-    return bookList;
-  }
-
-  final recentSearch = [];
-
-  List<String> books;
-  void getStringList() async {
-    var tempList = await searchBooks();
-    books = tempList.toList();
-    books.add("test");
-  }
+class _BookSearchState extends State<BookSearch> {
+  String query = "";
 
   @override
-  List<Widget> buildActions(BuildContext context) {
-    return [IconButton(icon: Icon(Icons.clear), onPressed: (){
-      for (int i = 0; i < books.length; i++) {
-        print(books[i]);
-      }
-    })];
-  }
 
-  @override
-  Widget buildLeading(BuildContext context) {
-    return IconButton(icon: AnimatedIcon(icon: AnimatedIcons.menu_arrow,
-        progress: transitionAnimation,), onPressed: (){
-          close(context, null);
-    });
-  }
+  Widget build(BuildContext context) {
 
-  @override
-  Widget buildResults(BuildContext context) {
-      recentSearch.add(query);
-      getStringList();
-  }
-
-  @override
-  Widget buildSuggestions(BuildContext context) {
-    getStringList();
-    final suggestionList = query.isEmpty? recentSearch : books;
-    return ListView.builder(itemBuilder: (context,index) => ListTile(
-        leading: Icon(Icons.history),
-        title: Text(suggestionList[index])
+    return Scaffold(
+      backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.grey[900],
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back,),
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+        ),
+        title: TextField(
+          autofocus: true,
+          style: TextStyle(color: Colors.white, fontSize: 19),
+          decoration: InputDecoration(
+              border: InputBorder.none,
+              focusedBorder: InputBorder.none,
+              enabledBorder: InputBorder.none,
+              errorBorder: InputBorder.none,
+              disabledBorder: InputBorder.none,
+              hintText: 'Search',
+              hintStyle: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 19
+              )
+          ),
+          onChanged: (val) {
+            setState(() {
+              query = val;
+            });
+          },
+        ),
       ),
-      itemCount: suggestionList?.length ?? 0,
+      body: StreamBuilder<QuerySnapshot>(
+        stream: (query != "" && query != null)
+            ? Firestore.instance
+            .collection('book_data')
+            .where("booksearch", arrayContains: query)
+            .snapshots()
+            : Firestore.instance.collection("book_data").snapshots(),
+        builder: (context, snapshot) {
+          return (snapshot.connectionState == ConnectionState.waiting)
+              ? Center(child: Loading())
+              : Container(
+                color: Colors.black,
+                child: Visibility(
+                  visible: (query != ''),
+                  child: ListView.builder(
+                      itemCount: snapshot.data.documents.length,
+                      itemBuilder: (context, index) {
+                        DocumentSnapshot data = snapshot.data.documents[index];
+                        return Padding(
+                          padding: const EdgeInsets.only(top: 12.0),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            color: Colors.blue[800],
+                            margin: EdgeInsets.fromLTRB(18.0, 6.0, 18.0, 0.0),
+                            child: ListTile(
+                              title: Text(data['bookname'],
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 22,
+                                    fontWeight: FontWeight.w500
+                                ),
+                              ),
+                              subtitle: Text(data['author'],
+                                overflow: TextOverflow.ellipsis,
+                                maxLines: 1,
+                                style: TextStyle(
+                                    color: Colors.white
+                                ),
+                              ),
+                              onTap: () {
+
+                              },
+                            ),
+                          ),
+                        );
+                      },
+            ),
+                ),
+          );
+        },
+      ),
     );
   }
 }

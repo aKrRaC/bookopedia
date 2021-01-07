@@ -8,6 +8,10 @@ class Search extends StatelessWidget {
 
   Widget build(BuildContext context) {
 
+    Future navigateToSubPage(context) async {
+      Navigator.push(context, MaterialPageRoute(builder: (context) => BookSearch()));
+    }
+
     void _pressed(butname) {
       Navigator.push(
         context,
@@ -72,7 +76,7 @@ class Search extends StatelessWidget {
                   ),
                   color: Colors.grey[900],
                   onPressed: () {
-                    showSearch(context: context, delegate: BookSearch());
+                    navigateToSubPage(context);
                 },
                 child: Row(
                   children: [

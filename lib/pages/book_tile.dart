@@ -35,7 +35,9 @@ class BookTile extends StatelessWidget {
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       style: TextStyle(
-                          color: Colors.white
+                          color: Colors.white,
+                          fontSize: 22,
+                          fontWeight: FontWeight.w500
                       ),
                     ),
                     subtitle: Text(book.author,
