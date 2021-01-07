@@ -51,6 +51,7 @@ class About extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.black,
       appBar: AppBar(
@@ -64,8 +65,9 @@ class About extends StatelessWidget {
             SizedBox(height: 30.0,),
             Row(
               children: [
+                SizedBox(width: width*0.14,),
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(35.0,2.0,20.0,0),
+                  padding: const EdgeInsets.fromLTRB(0,2.0,20.0,0),
                   child: CircleAvatar(
                     backgroundImage: AssetImage('assets/images/icon.png'),
                     radius: 45.0,

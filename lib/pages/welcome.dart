@@ -42,7 +42,7 @@ class Welcome extends StatelessWidget {
             ),
             TextSpan(
               text: 'welcome to ',
-              style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w400),
+              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400),
             ),
             TextSpan(
               text: 'Book',
@@ -58,7 +58,7 @@ class Welcome extends StatelessWidget {
             ),
             TextSpan(
               text: ', where (you guessed it :P) find books! A few points to note before starting:\n\n',
-              style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w400),
+              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400),
             ),
             TextSpan(
               text: '.',
@@ -66,7 +66,7 @@ class Welcome extends StatelessWidget {
             ),
             TextSpan(
               text: '\t"Books you might like" in homescreen won\'t show up unless you have a credit > 10.\n',
-              style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w400),
+              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400),
             ),
             TextSpan(
               text: '.',
@@ -74,7 +74,15 @@ class Welcome extends StatelessWidget {
             ),
             TextSpan(
               text: '\tEach book you add increments the credit by 5.\n',
-              style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w400),
+              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400),
+            ),
+            TextSpan(
+              text: '.',
+              style: TextStyle(color: Colors.white, fontSize: 28),
+            ),
+            TextSpan(
+              text: '\tContacting a person either via phone/whatsapp requires credits.\n',
+              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400),
             ),
             TextSpan(
               text: '.',
@@ -82,11 +90,11 @@ class Welcome extends StatelessWidget {
             ),
             TextSpan(
               text: '\tYou can check your credits along with the no. of books you have added on the profile page.\n',
-              style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w400),
+              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400),
             ),
             TextSpan(
               text: '\nThat\'s all for now. We hope you enjoy using our app. Gracias!',
-              style: TextStyle(color: Colors.white, fontSize: 17, fontWeight: FontWeight.w400),
+              style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400),
             ),
           ]),
     );
@@ -95,6 +103,7 @@ class Welcome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.black,
         body: Align(
@@ -105,8 +114,9 @@ class Welcome extends StatelessWidget {
               Row(
                 children: [
                   SizedBox(height: height*0.25,),
+                  SizedBox(width: width*0.14,),
                   Padding(
-                    padding: const EdgeInsets.fromLTRB(35.0,2.0,20.0,0),
+                    padding: const EdgeInsets.fromLTRB(0,2.0,20.0,0),
                     child: CircleAvatar(
                       backgroundImage: AssetImage('assets/images/icon.png'),
                       radius: 45.0,

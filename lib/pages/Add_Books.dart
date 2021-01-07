@@ -128,7 +128,7 @@ class _AddBooksState extends State<AddBooks> {
     List<String> bookSearchList = List();
     String temp = "";
     for (int i = 0; i < bookname.length; i++) {
-      temp = temp + bookname[i];
+      temp = temp + bookname[i].toLowerCase();
       bookSearchList.add(temp);
     }
     return bookSearchList;
@@ -217,8 +217,28 @@ class _AddBooksState extends State<AddBooks> {
                         'semester': bsem,
                         'booksearch': setSearchParam(bookname),
                   });
-                  print(result);
                   if (result != null) {
+                    if(bsem == "S1" || bsem =="S2"){
+                      Firestore.instance.collection("book_data").document();
+                      result.updateData({
+                        "creq": 2,
+                      });
+                    }else if(bsem == "S3" || bsem =="S4"){
+                      Firestore.instance.collection("book_data").document();
+                      result.updateData({
+                        "creq": 3,
+                      });
+                    }else if(bsem == "S5" || bsem =="S6"){
+                      Firestore.instance.collection("book_data").document();
+                      result.updateData({
+                        "creq": 5,
+                      });
+                    }else if(bsem == "S7" || bsem =="S8"){
+                      Firestore.instance.collection("book_data").document();
+                      result.updateData({
+                        "creq": 7,
+                      });
+                    }
                     Firestore.instance.collection("user_data")
                         .document(userData.uid)
                         .updateData({

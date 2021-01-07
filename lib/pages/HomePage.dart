@@ -78,16 +78,22 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(18,145,0,0),
-                          child: Text("Books you might like:",
-                          style: TextStyle(color: Colors.white,
-                          fontWeight: FontWeight.w600),),
-                        ),
-                        Container(
+                        Visibility(
+                          visible: (userData.credit >= 10),
                           child: Padding(
-                            padding: const EdgeInsets.fromLTRB(0,175,0,70),
-                            child: BookList(),
+                            padding: const EdgeInsets.fromLTRB(18,145,0,0),
+                            child: Text("Books you might like:",
+                            style: TextStyle(color: Colors.white,
+                            fontWeight: FontWeight.w600),),
+                          ),
+                        ),
+                        Visibility(
+                          visible: (userData.credit > 10),
+                          child: Container(
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(0,175,0,70),
+                              child: BookList(),
+                            ),
                           ),
                         ),
                         ]

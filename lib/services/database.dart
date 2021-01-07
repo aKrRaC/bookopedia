@@ -51,6 +51,7 @@ class DatabaseService {
         userid: doc.data['userid'],
         useradmnum: doc.data['useradmnum'],
         bookid: doc.data['bookid'],
+        creq: doc.data['creq'],
       );
     }).toList();
   }

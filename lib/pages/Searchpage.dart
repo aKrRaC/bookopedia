@@ -1,95 +1,64 @@
-import 'package:bookopedia/models/book.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flappy_search_bar/flappy_search_bar.dart';
-import 'package:flappy_search_bar/search_bar_style.dart';
+//import 'package:bookopedia/models/book.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class Searchpage extends StatefulWidget {
+class BookSearch extends SearchDelegate<String> {
+
+
+  Future<List> searchBooks() async {
+    List<String> bookList;
+    final List<DocumentSnapshot> documents = (await Firestore.instance
+        .collection('book_data')
+        .where("booksearch",arrayContains: query)
+        .getDocuments())
+        .documents;
+    bookList = documents.map((documentSnapshot) {
+      documentSnapshot['bookname'] as String;
+    }).toList();
+    return bookList;
+  }
+
+  final recentSearch = [];
+
+  List<String> books;
+  void getStringList() async {
+    var tempList = await searchBooks();
+    books = tempList.toList();
+    books.add("test");
+  }
 
   @override
-  _SearchpageState createState() => _SearchpageState();
-}
+  List<Widget> buildActions(BuildContext context) {
+    return [IconButton(icon: Icon(Icons.clear), onPressed: (){
+      for (int i = 0; i < books.length; i++) {
+        print(books[i]);
+      }
+    })];
+  }
 
-class _SearchpageState extends State<Searchpage> {
-  BookData book;
-
-  Future<List<BookData>> search(String search) async {
-    await Future.delayed(Duration(seconds: 2));
-    final List<DocumentSnapshot> bookList =
-        (await Firestore.instance
-            .collection('book_data')
-            .where("booksearch",arrayContains: search)
-            .getDocuments())
-    .documents;
-    return List.generate(bookList.length, (int index) {
-      return BookData(
-        bookname: book.bookname,
-        author: book.author,
-      );
+  @override
+  Widget buildLeading(BuildContext context) {
+    return IconButton(icon: AnimatedIcon(icon: AnimatedIcons.menu_arrow,
+        progress: transitionAnimation,), onPressed: (){
+          close(context, null);
     });
   }
 
   @override
+  Widget buildResults(BuildContext context) {
+      recentSearch.add(query);
+      getStringList();
+  }
 
-  Widget build(BuildContext context) {
-
-    return Scaffold(
-      backgroundColor: Colors.black,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.fromLTRB(15, 20, 15, 15),
-          child: SearchBar<BookData>(
-            crossAxisCount: 1,
-            hintText: 'Search',
-            cancellationWidget: Icon(
-              Icons.close,
-              color: Colors.grey,
-            ) ,
-            searchBarStyle: SearchBarStyle(
-              padding: EdgeInsets.all(2),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            iconActiveColor: Colors.white,
-            emptyWidget: Center(
-              child: Text("No results found! :(",
-                style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 12.0,
-                    fontWeight: FontWeight.normal
-                ),
-              ),
-            ),
-            icon: Padding(
-              padding: const EdgeInsets.fromLTRB(12, 0, 0, 0),
-              child: Icon(
-                Icons.search,
-                color: Colors.grey,
-              ),
-            ),
-            textStyle: TextStyle(
-                color: Colors.white
-            ),
-            onSearch: search,
-            onItemFound: (BookData book , int index) {
-              return ListTile(
-                title: Text(
-                  book.bookname,
-                  style: TextStyle(
-                      color: Colors.red
-                  ),
-                ),
-                subtitle: Text(
-                  book.author,
-                  style: TextStyle(
-                      color: Colors.white
-                  ),
-                ),
-              );
-            },
-          ),
-        ),
-      ) ,
+  @override
+  Widget buildSuggestions(BuildContext context) {
+    getStringList();
+    final suggestionList = query.isEmpty? recentSearch : books;
+    return ListView.builder(itemBuilder: (context,index) => ListTile(
+        leading: Icon(Icons.history),
+        title: Text(suggestionList[index])
+      ),
+      itemCount: suggestionList?.length ?? 0,
     );
   }
 }

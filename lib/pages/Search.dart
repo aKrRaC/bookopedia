@@ -4,9 +4,6 @@ import 'package:flutter/material.dart';
 
 class Search extends StatelessWidget {
 
-  Future navigateToSubPage(context) async {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => Searchpage()));
-  }
   @override
 
   Widget build(BuildContext context) {
@@ -75,7 +72,7 @@ class Search extends StatelessWidget {
                   ),
                   color: Colors.grey[900],
                   onPressed: () {
-                    navigateToSubPage(context);
+                    showSearch(context: context, delegate: BookSearch());
                 },
                 child: Row(
                   children: [
