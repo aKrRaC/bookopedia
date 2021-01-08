@@ -65,7 +65,7 @@ class Welcome extends StatelessWidget {
               style: TextStyle(color: Colors.white, fontSize: 28),
             ),
             TextSpan(
-              text: '\t"Books you might like" in homescreen won\'t show up unless you have a credit > 10.\n',
+              text: '\t"Books you might like" in homescreen won\'t show up unless you add your first book.\n',
               style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.w400),
             ),
             TextSpan(

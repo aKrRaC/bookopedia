@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                         Visibility(
-                          visible: (userData.credit >= 10),
+                          visible: (userData.credit > 4),
                           child: Padding(
                             padding: const EdgeInsets.fromLTRB(18,145,0,0),
                             child: Text("Books you might like:",
@@ -88,7 +88,7 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                         Visibility(
-                          visible: (userData.credit > 10),
+                          visible: (userData.credit > 4),
                           child: Container(
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(0,175,0,70),

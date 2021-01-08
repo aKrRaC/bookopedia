@@ -52,7 +52,7 @@ class _BookdescState extends State<Bookdesc> {
   }
 
   _launchWhatsapp(String phone, String uname, String bname) async {
-    dynamic url = 'https://wa.me/$phone?text=Hi, I\'m $uname. I need the book "$bname" that you posted in Bookopedia. '
+    dynamic url = 'https://wa.me/91$phone?text=Hi, I\'m $uname. I need the book "$bname" that you posted in Bookopedia. '
         'Kindly reply if you are interested in lending me the book. Thank you :)';
     if (await canLaunch(url)) {
       await launch(url);
