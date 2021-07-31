@@ -1,10 +1,8 @@
-# Bookopedia [wip]
+# Bookopedia
 
 where you find books!
 
 ## About
-
-This project is under development!
 
 A few resources to get you started if this is your first Flutter project:
 
